@@ -20,6 +20,10 @@ function FutureTrade() {
                             <Tab.Pane className="tab-pane fade" id="Market" eventKey='first'>
                                 <div className="row g-3">
                                     <div className="col-lg-12">
+                                        <div className="d-flex align-items-center justify-content-between my-3">
+                                            <span className="small text-muted">Avbl</span>
+                                            <span className="">310.800000 USDT</span>
+                                        </div>
                                         <form>
                                             <div className="input-group mb-3">
                                                 <span className="input-group-text">Size</span>
