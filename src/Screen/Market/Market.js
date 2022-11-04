@@ -1,6 +1,6 @@
 import React from 'react';
 import PageTitle from '../../Component/Comman/PageTitle';
-import FutureChart from '../../Component/Future/FutureChart';
+import MarketChart from '../../Component/Market/MarketChart';
 import MarketTrade from '../../Component/Market/MarketTrade';
 
 function Market() {
@@ -11,7 +11,7 @@ function Market() {
             </div>
             <div className='container-xxl'>
                 <div className='row g-3 mb-3 row-deck'>
-                    <FutureChart />
+                    <MarketChart />
                     <MarketTrade />
                 </div>
             </div>
