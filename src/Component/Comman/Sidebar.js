@@ -58,7 +58,7 @@ function Sidebar(props) {
                 <span className="logo-icon">
                     <i className="fa fa-gg-circle fs-3"></i>
                 </span>
-                <span className="logo-text"  >Cryptoon</span>
+                <span className="logo-text">All In Network</span>
             </a>
             <ul className="menu-list flex-grow-1 mt-4 px-1">
 

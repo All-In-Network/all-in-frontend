@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import Sidebar from './Component/Comman/Sidebar';
 import MainIndex from './Screen/MainIndex';
-import { Switch, useNavigate, withRouter } from 'react-router-dom';
+import {  useNavigate } from 'react-router-dom';
 import AuthIndex from './Screen/AuthIndex';
 import menu from '../src/Component/Data/Menu/Menu.json';
 import menu2 from '../src/Component/Data/Menu/Menu2.json';
