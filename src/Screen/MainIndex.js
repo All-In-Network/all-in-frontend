@@ -5,6 +5,7 @@ import { onModalOpen, onChangeDarkMode, onChangeHighcontrast, OnchangeRTLmode } 
 import Header from '../Component/Comman/Header';
 import Dashboard from './Dashboard/Dashboard';
 import Marketplace from './Marketplace/Marketplace';
+import Traders from './Traders/Traders';
 import NewModal from '../Component/Comman/NewModal';
 import Exchange from './Exchange/Exchange';
 import Market from './Market/Market';
@@ -88,7 +89,7 @@ function MainIndex(props) {
                     <Route exact path={baseUrl + '/'} element={<Dashboard />} />
                     <Route exact path={baseUrl + '/marketplace'} element={<Marketplace />} />
                     <Route exact path={baseUrl + '/market'} element={<Market />} />
-                    <Route exact path={baseUrl + '/ico'} element={<Ico />} />
+                    <Route exact path={baseUrl + '/traders'} element={<Traders />} />
                     <Route exact path={baseUrl + '/future'} element={<Future />} />
                     <Route exact path={baseUrl + '/p2p'} element={<P2pPage />} />
                     <Route exact path={baseUrl + '/battel'} element={<Battel />} />

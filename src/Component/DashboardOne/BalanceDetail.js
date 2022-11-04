@@ -194,7 +194,6 @@ function BalanceDetail() {
                     <Tab.Container defaultActiveKey="first">
                         <div className="card-header py-3 d-flex justify-content-between bg-transparent border-bottom align-items-center flex-wrap">
                             <h6 className="mb-0 fw-bold">Balance Details</h6>
-                            
                         </div>
                         <div className="card-body">
                             <Tab.Content className="tab-content">
