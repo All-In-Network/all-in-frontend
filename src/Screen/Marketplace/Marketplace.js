@@ -1,12 +1,12 @@
 import React from "react";
-import PageTitle from "../../../Component/Comman/PageTitle";
-import Profile from "../../../Component/WidgetExample/Profile page/Profile";
-import ProfileSetting from "../../../Component/WidgetExample/Profile page/ProfileSetting";
+import PageTitle from "../../Component/Comman/PageTitle";
+import Profile from "../../Component/Marketplace/Nft";
+import ProfileSetting from "../../Component/Marketplace/ProfileSetting";
 
 function Marketplace() {
     return (<>
             <div className="body-header border-bottom d-flex py-3 mb-3">
-                <PageTitle pagetitle='Admin Profile' sidebutton={true} />
+                <PageTitle pagetitle='Marketplace'/>
             </div>
             <div className="container-xxl">
                 <div className='row g-3'>

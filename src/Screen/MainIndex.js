@@ -4,6 +4,7 @@ import { Route, Routes, useNavigate } from 'react-router-dom';
 import { onModalOpen, onChangeDarkMode, onChangeHighcontrast, OnchangeRTLmode } from '../Redux/Actions/Actions';
 import Header from '../Component/Comman/Header';
 import Dashboard from './Dashboard/Dashboard';
+import Marketplace from './Marketplace/Marketplace';
 import NewModal from '../Component/Comman/NewModal';
 import Exchange from './Exchange/Exchange';
 import Market from './Market/Market';
@@ -85,7 +86,7 @@ function MainIndex(props) {
             <div className="body d-flex py-3 ">
                 <Routes>
                     <Route exact path={baseUrl + '/'} element={<Dashboard />} />
-                    <Route exact path={baseUrl + '/exchange'} element={<Exchange />} />
+                    <Route exact path={baseUrl + '/marketplace'} element={<Marketplace />} />
                     <Route exact path={baseUrl + '/market'} element={<Market />} />
                     <Route exact path={baseUrl + '/ico'} element={<Ico />} />
                     <Route exact path={baseUrl + '/future'} element={<Future />} />

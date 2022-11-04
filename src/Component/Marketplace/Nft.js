@@ -1,30 +1,34 @@
 import React, { useState } from 'react';
-import { ProfileData } from '../../../Component/Data/WidgetExampleData/ProfileData/ProfileData';
-import Avatar4 from '../../../assets/images/lg/avatar4.svg'
+import { ProfileData } from '../Data/WidgetExampleData/ProfileData/ProfileData';
 import { Modal } from 'react-bootstrap';
 
 function Profile() {
     const [ismodal, setIsmodal] = useState(false)
     return (
         <div className="card profile-card flex-column mb-3">
-            <div className="card-header py-3 d-flex justify-content-between bg-transparent border-bottom-0">
+            {/* <div className="card-header py-3 d-flex justify-content-between bg-transparent border-bottom-0">
                 <h6 className="mb-0 fw-bold ">Profile</h6>
-            </div>
+            </div> */}
             <div className="card-body d-flex profile-fulldeatil flex-column">
                 <div className="profile-block text-center w220 mx-auto">
                     <a href="#!">
-                        <img src={Avatar4} alt="" className="avatar xl rounded img-thumbnail shadow-sm" />
+                        <img
+                            src={`https://gateway.pinata.cloud/ipfs/QmfWBWsdtQErNxMHb2UfWBQHTwbTEdCUMetpwR4y9uDNp3`}
+                            alt=""
+                            className="avatar xl rounded img-thumbnail shadow-sm"
+                            style={{ height: "50vh", width: "45vw", borderRadius: 12 }}
+                        />
                     </a>
-                    <button className="btn btn-primary" onClick={() => { setIsmodal(true) }} style={{ position: 'absolute', top: '15px', right: '15px' }}><i className="icofont-edit"></i></button>
-                    <div className="about-info d-flex align-items-center mt-3 justify-content-center flex-column">
+                    {/* <button className="btn btn-primary" onClick={() => { setIsmodal(true) }} style={{ position: 'absolute', top: '15px', right: '15px' }}><i className="icofont-edit"></i></button> */}
+                    {/* <div className="about-info d-flex align-items-center mt-3 justify-content-center flex-column">
                         <span className="text-muted small">Admin ID : PXL-0001</span>
-                    </div>
+                    </div> */}
                 </div>
                 <div className="profile-info w-100">
-                    <h6 className="mb-0 mt-2  fw-bold d-block fs-6 text-center">Adrian	Allan</h6>
-                    <span className="py-1 fw-bold small-11 mb-0 mt-1 text-muted text-center mx-auto d-block">24 years, California</span>
-                    <p className="mt-2">Duis felis ligula, pharetra at nisl sit amet, ullamcorper fringilla mi. Cras luctus metus non enim porttitor sagittis. Sed tristique scelerisque arcu id dignissim.</p>
-                    <div className="row g-2 pt-2">
+                    {/* <h6 className="mb-0 mt-2  fw-bold d-block fs-6 text-center"></h6> */}
+                    {/* <span className="py-1 fw-bold small-11 mb-0 mt-1 text-muted text-center mx-auto d-block">24 years, California</span> */}
+                    {/* <p className="mt-2">Duis felis ligula, pharetra at nisl sit amet, ullamcorper fringilla mi. Cras luctus metus non enim porttitor sagittis. Sed tristique scelerisque arcu id dignissim.</p> */}
+                    {/* <div className="row g-2 pt-2">
                         {
                             ProfileData.map((d, i) => {
                                 return <div key={'s' + i} className="col-xl-12">
@@ -35,7 +39,7 @@ function Profile() {
                                 </div>
                             })
                         }
-                    </div>
+                    </div> */}
                 </div>
             </div>
             <Modal show={ismodal} onHide={() => { setIsmodal(false) }} style={{ display: 'block' }}>

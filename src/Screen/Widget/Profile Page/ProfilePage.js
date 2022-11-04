@@ -1,7 +1,7 @@
 import React from "react";
 import PageTitle from "../../../Component/Comman/PageTitle";
-import Profile from "../../../Component/WidgetExample/Profile page/Profile";
-import ProfileSetting from "../../../Component/WidgetExample/Profile page/ProfileSetting";
+import Profile from "../../../Component/Marketplace/Nft";
+import ProfileSetting from "../../../Component/Marketplace/ProfileSetting";
 
 function ProfilePage() {
     return (<>
