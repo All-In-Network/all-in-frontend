@@ -189,42 +189,6 @@ function BalanceDetail() {
     const[seriesCircleChart,setSeriesCircleChart]=useState([70])
     return (
         <div className='row g-3 mb-3 row-deck'>
-            <div className="col-xl-12 col-xxl-7">
-                <div className="card" >
-                    <Tab.Container defaultActiveKey="first">
-                        <div className="card-header py-3 d-flex justify-content-between bg-transparent border-bottom align-items-center flex-wrap">
-                            <h6 className="mb-0 fw-bold">Balance Details</h6>
-                        </div>
-                        <div className="card-body">
-                            <Tab.Content className="tab-content">
-                                <Tab.Pane className="tab-pane fade show" id="Spot" eventKey="first">
-                                    <div className="row g-3">
-                                        <div className="col-lg-6">
-                                            <div>Account balance:</div>
-                                            <h3>$ 10.000</h3>
-                                            <div className="mt-3 pt-3 text-uppercase text-muted pt-2 small">Min Balance:</div>
-                                            <h5>$ 9.600</h5>
-                                            <div className="mt-3 text-uppercase text-muted small">Total profit:</div>
-                                            <h5>$ 2.000</h5>
-                                            <div className="mt-3 text-uppercase text-muted small">Gain:</div>
-                                            <h5>0 %</h5>
-                                        </div>
-                                        <div className="col-lg-6" style={{ position: 'relative' }}>
-                                            {/* <>apex Chart here</> */}
-                                            <Chart
-                                                options={options}
-                                                series={series}
-                                                type="donut"
-                                                height="250"
-                                            />
-                                            <div className="resize-triggers"><div className="expand-trigger"><div style={{ width: '512px', height: '260px' }}></div></div><div className="contract-trigger"></div></div></div>
-                                    </div>
-                                </Tab.Pane>
-                            </Tab.Content>
-                        </div>
-                    </Tab.Container>
-                </div>
-            </div>
             <div className="col-xl-12 col-xxl-5">
                 <div className="card">
                     <div className="card-header py-3 d-flex justify-content-between bg-transparent align-items-center">
@@ -297,6 +261,43 @@ function BalanceDetail() {
                     </div>
                 </div>
             </div>
+            <div className="col-xl-12 col-xxl-7">
+                <div className="card" >
+                    <Tab.Container defaultActiveKey="first">
+                        <div className="card-header py-3 d-flex justify-content-between bg-transparent border-bottom align-items-center flex-wrap">
+                            <h6 className="mb-0 fw-bold">Balance Details</h6>
+                        </div>
+                        <div className="card-body">
+                            <Tab.Content className="tab-content">
+                                <Tab.Pane className="tab-pane fade show" id="Spot" eventKey="first">
+                                    <div className="row g-3">
+                                        <div className="col-lg-6">
+                                            <div>Account balance:</div>
+                                            <h3>$ 10.000</h3>
+                                            <div className="mt-3 pt-3 text-uppercase text-muted pt-2 small">Min Balance:</div>
+                                            <h5>$ 9.600</h5>
+                                            <div className="mt-3 text-uppercase text-muted small">Total profit:</div>
+                                            <h5>$ 2.000</h5>
+                                            <div className="mt-3 text-uppercase text-muted small">Gain:</div>
+                                            <h5>0 %</h5>
+                                        </div>
+                                        <div className="col-lg-6" style={{ position: 'relative' }}>
+                                            {/* <>apex Chart here</> */}
+                                            <Chart
+                                                options={options}
+                                                series={series}
+                                                type="donut"
+                                                height="250"
+                                            />
+                                            <div className="resize-triggers"><div className="expand-trigger"><div style={{ width: '512px', height: '260px' }}></div></div><div className="contract-trigger"></div></div></div>
+                                    </div>
+                                </Tab.Pane>
+                            </Tab.Content>
+                        </div>
+                    </Tab.Container>
+                </div>
+            </div>
+            
         </div>
     )
 }
