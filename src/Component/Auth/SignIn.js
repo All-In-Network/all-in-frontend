@@ -10,8 +10,7 @@ function Signin() {
                 <div className="row g-3">
                     <div className="col-lg-6 d-flex justify-content-center align-items-center auth-h100">
                         <div className="d-flex flex-column">
-                            <h1>Account Login</h1>
-                            <span className="text-muted">Welcome back! Log In with your Wallet</span>
+                            <h1>Connect wallet</h1>
                             <Tab.Container defaultActiveKey="first">
                                 <Tab.Content className="tab-content mt-4 mb-3" >
                                     <Tab.Pane className="tab-pane fade " id="Email" eventKey="first">
