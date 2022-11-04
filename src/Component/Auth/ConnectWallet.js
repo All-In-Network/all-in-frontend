@@ -5,8 +5,7 @@ function ConnectWallet() {
     return (<>
         <div className="body d-flex p-0 p-xl-5">
             <div className="container">
-                <div className="row g-3">
-                    <div className="col-lg-6 d-flex justify-content-center align-items-center auth-h100">
+                <div className="col-lg-6 d-flex justify-content-center m-auto align-items-center auth-h100">
                         <div className="d-flex flex-column">
                             <h1>Connect wallet</h1>
                             <Tab.Container defaultActiveKey="first">
@@ -23,7 +22,6 @@ function ConnectWallet() {
                                 </Tab.Content>
                             </Tab.Container>
                         </div>
-                    </div>
                 </div>
             </div>
         </div>
