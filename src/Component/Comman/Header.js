@@ -1,13 +1,12 @@
 import React, { useState } from 'react';
 import { Dropdown } from 'react-bootstrap';
 import Profile from '../../assets/images/profile_av.svg';
-import QrCode from '../../assets/images/qr-code.png';
 import { Link } from 'react-router-dom';
 
 
 function Header(props) {
     const { onModalOpen } = props;
-   
+    const wallet = "5Cfwbj2b9P8ovq3FJLhLNRFHPJcToduo7p3EpGfM9sRFszPH".slice(0, 20);
     return (
         <div className="header">
             <nav className="navbar py-4">
@@ -23,14 +22,15 @@ function Header(props) {
                                         <div className="d-flex py-1">
                                             <img className="avatar rounded-circle" src={Profile} alt="profile" />
                                             <div className="flex-fill ms-3">
-                                                <p className="mb-0"><span className="font-weight-bold">John	Quinn</span></p>
+                                                <p className="mb-0"><span className="font-weight-bold">Nickname</span></p>
                                             </div>
                                         </div>
 
                                         <div><hr className="dropdown-divider border-dark" /></div>
+                                        <span>{wallet}</span>
                                     </div>
                                     <div className="list-group m-2 ">
-                                        <Link to={process.env.PUBLIC_URL +"/sign-in"} className="list-group-item list-group-item-action border-0 ">
+                                        <Link to={process.env.PUBLIC_URL +"/connect"} className="list-group-item list-group-item-action border-0 ">
                                             <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="24px" height="24px" viewBox="0 0 24 24" className="me-3">
                                                 <rect xmlns="http://www.w3.org/2000/svg" className="st0" width="24" height="24" style={{ fill: 'none' }} fill="none"></rect>
                                                 <path xmlns="http://www.w3.org/2000/svg" d="M20,4c0-1.104-0.896-2-2-2H6C4.896,2,4,2.896,4,4v16c0,1.104,0.896,2,2,2h12  c1.104,0,2-0.896,2-2V4z" style={{ fill: 'var(--primary-color)' }} data-st="fill:var(--chart-color4);"></path>
