@@ -1,11 +1,4 @@
 import React from 'react';
-import { Dropdown } from 'react-bootstrap';
-import flag from '../../assets/images/flag/GB.png';
-import F1 from '../../assets/images/flag/GB.png';
-import F2 from '../../assets/images/flag/DE.png';
-import F3 from '../../assets/images/flag/FR.png';
-import F4 from '../../assets/images/flag/IT.png';
-import F5 from '../../assets/images/flag/RU.png';
 import { Link } from "react-router-dom";
 
 function AuthHeader(props) {
@@ -16,37 +9,12 @@ function AuthHeader(props) {
                 <div className="col">
                 <Link to={process.env.PUBLIC_URL + "/"} className="d-flex align-item-center">
                     <i className="fa fa-gg-circle fs-3"></i>
-                    <h5 className="mb-0 mt-1 mx-2">Cryptoon</h5>
+                    <h5 className="mb-0 mt-1 mx-2">All In Network</h5>
                 </Link>
                 </div>
                 <div className="col-auto">
                     <div className="d-flex align-item-center">
-                        <Dropdown className="dropdown zindex-popover py-2 px-3">
-                            <Dropdown.Toggle as='s' className="nav-link dropdown-toggle pulse" href="#!" role="button" data-bs-toggle="dropdown">
-                                <img src={flag} alt="" />
-                            </Dropdown.Toggle>
-                            <Dropdown.Menu className="dropdown-menu rounded-lg shadow border-0 dropdown-animation dropdown-menu-md-end m-0">
-                                <div className="card border-0 ">
-                                    <ul className="list-unstyled py-2 px-3">
-                                        <li>
-                                            <a href="#!" className=""><img src={F1} alt="" /> English</a>
-                                        </li>
-                                        <li>
-                                            <a href="#!" className=""><img src={F2} alt="" /> German</a>
-                                        </li>
-                                        <li>
-                                            <a href="#!" className=""><img src={F3} alt="" /> French</a>
-                                        </li>
-                                        <li>
-                                            <a href="#!" className=""><img src={F4} alt="" /> Italian</a>
-                                        </li>
-                                        <li>
-                                            <a href="#!" className=""><img src={F5} alt="" /> Russian</a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </Dropdown.Menu>
-                        </Dropdown>
+                        
                         <div className="setting ms-2 mt-1">
                             <a href="#!" data-bs-toggle="modal" data-bs-target="#Settingmodal" onClick={onModalOpen}>
                                 <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="30px" height="30px" viewBox="0 0 38 38">
