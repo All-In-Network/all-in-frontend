@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { Nav, Tab, TabContainer } from 'react-bootstrap';
+import { Tab } from 'react-bootstrap';
 import Chart from "react-apexcharts";
-import { Link } from 'react-router-dom';
+
 
 function BalanceDetail() {
     const [options, setOptions] = useState({
@@ -194,13 +194,7 @@ function BalanceDetail() {
                     <Tab.Container defaultActiveKey="first">
                         <div className="card-header py-3 d-flex justify-content-between bg-transparent border-bottom align-items-center flex-wrap">
                             <h6 className="mb-0 fw-bold">Balance Details</h6>
-                            <Nav className="nav nav-tabs tab-body-header rounded d-inline-flex mt-2 mt-md-0" role="tablist">
-                                <Nav.Item className="nav-item"><Nav.Link className="nav-link " eventKey="first" data-bs-toggle="tab" href="#Spot" role="tab">Spot</Nav.Link></Nav.Item>
-                                <Nav.Item className="nav-item"><Nav.Link className="nav-link" eventKey="second" data-bs-toggle="tab" href="#P2P" role="tab">P2P</Nav.Link></Nav.Item>
-                                <Nav.Item className="nav-item"><Nav.Link className="nav-link" eventKey="third" data-bs-toggle="tab" href="#Margin" role="tab">Margin</Nav.Link></Nav.Item>
-                                <Nav.Item className="nav-item"><Nav.Link className="nav-link" eventKey="foruth" data-bs-toggle="tab" href="#Future" role="tab">Future</Nav.Link></Nav.Item>
-                                <Nav.Item className="nav-item"><Nav.Link className="nav-link" eventKey="fifth" data-bs-toggle="tab" href="#Earn" role="tab">Earn</Nav.Link></Nav.Item>
-                            </Nav>
+                            
                         </div>
                         <div className="card-body">
                             <Tab.Content className="tab-content">
@@ -208,13 +202,13 @@ function BalanceDetail() {
                                     <div className="row g-3">
                                         <div className="col-lg-6">
                                             <div>Account balance:</div>
-                                            <h3>0.18005388 BTC</h3>
-                                            <div className="mt-3 pt-3 text-uppercase text-muted pt-2 small">Buy this month</div>
-                                            <h5>3.0675432 BTC</h5>
-                                            <div className="mt-3 text-uppercase text-muted small">Sell this month</div>
-                                            <h5>2.0345618 BTC</h5>
-                                            <div className="mt-3 text-uppercase text-muted small">Estimated Value:</div>
-                                            <h5>$22000.29</h5>
+                                            <h3>$ 10.000</h3>
+                                            <div className="mt-3 pt-3 text-uppercase text-muted pt-2 small">Min Balance:</div>
+                                            <h5>$ 9.600</h5>
+                                            <div className="mt-3 text-uppercase text-muted small">Total profit:</div>
+                                            <h5>$ 2.000</h5>
+                                            <div className="mt-3 text-uppercase text-muted small">Gain:</div>
+                                            <h5>0 %</h5>
                                         </div>
                                         <div className="col-lg-6" style={{ position: 'relative' }}>
                                             {/* <>apex Chart here</> */}
@@ -227,93 +221,6 @@ function BalanceDetail() {
                                             <div className="resize-triggers"><div className="expand-trigger"><div style={{ width: '512px', height: '260px' }}></div></div><div className="contract-trigger"></div></div></div>
                                     </div>
                                 </Tab.Pane>
-                                <Tab.Pane className="tab-pane fade" id="P2P" eventKey="second">
-                                    <div className="row g-3">
-                                        <div className="col-lg-6">
-                                            <div>Account balance:</div>
-                                            <h3>0.00005388 BTC</h3>
-                                            <div className="mt-3 pt-3 text-uppercase text-muted pt-2 small">Buy this month</div>
-                                            <h5>0.00005388 BTC</h5>
-                                            <div className="mt-3 text-uppercase text-muted small">Sell this month</div>
-                                            <h5>2.0345618 BTC</h5>
-                                            <div className="mt-3 text-uppercase text-muted small">Estimated Value:</div>
-                                            <h5>$2000.29</h5>
-                                        </div>
-                                        <div className="col-lg-6" style={{ position: 'relative' }}>
-                                            <Chart
-                                                options={options1}
-                                                series={series1}
-                                                type="donut"
-                                                height="250"
-                                            />
-                                            <div className="resize-triggers"><div className="expand-trigger"><div style={{ width: '1px', height: '1px' }}></div></div><div className="contract-trigger"></div></div></div>
-                                    </div>
-                                </Tab.Pane>
-                                <Tab.Pane className="tab-pane fade" id="Margin" eventKey="third">
-                                    <div className="row g-3">
-                                        <div className="col-lg-6">
-                                            <div>Total balance:</div>
-                                            <h3>0.00095000 BTC≈$3570</h3>
-                                            <div className="mt-3 pt-3 text-uppercase text-muted pt-2 small">Total Debt:</div>
-                                            <h5>0.00005388 BTC</h5>
-                                            <div className="mt-3 text-uppercase text-muted small">Account Equity:</div>
-                                            <h5>2.0345618 BTC</h5>
-                                            <div className="mt-3 text-uppercase text-muted small">Profit &amp; Loss:</div>
-                                            <h5>0.95 BTC(1.6.00%) $25 (8.00%)</h5>
-                                        </div>
-                                        <div className="col-lg-6" style={{ position: 'relative' }}>
-                                            {/* <>Apex chart here</> */}
-                                            <Chart
-                                                options={circlemultile}
-                                                series={seriescirclemultile}
-                                                type="radialBar"
-                                                height="300"
-                                            />
-                                            <div className="resize-triggers"><div className="expand-trigger"><div style={{ width: '1px', height: '1px' }}></div></div><div className="contract-trigger"></div></div></div>
-                                    </div>
-                                </Tab.Pane>
-                                <Tab.Pane className="tab-pane fade" id="Future" eventKey="foruth">
-                                    <div className="row g-3">
-                                        <div className="col-lg-6">
-                                            <div>Total Margin Balance:</div>
-                                            <h3>0.00095000 BTC≈$3570</h3>
-                                            <div className="mt-3 pt-3 text-uppercase text-muted pt-2 small">Total Wallet Balance:</div>
-                                            <h5>0.00005388 BTC</h5>
-                                            <div className="mt-3 text-uppercase text-muted small">Total Unrealized PNL:</div>
-                                            <h5>2.0345618 BTC</h5>
-                                        </div>
-                                        <div className="col-lg-6" style={{ position: 'relative' }}>
-                                            {/* <>apex chart here</>                                        */}
-                                            <Chart
-                                                options={circleGradient}
-                                                series={seriesCircleGradient}
-                                                type="radialBar"
-                                                height="300"
-                                            />
-                                            <div className="resize-triggers"><div className="expand-trigger"><div style={{ width: '1px', height: '1px' }}></div></div><div className="contract-trigger"></div></div></div>
-                                    </div>
-                                </Tab.Pane>
-                                <Tab.Pane className="tab-pane fade" id="Earn" eventKey="fifth">
-                                    <div className="row g-3">
-                                        <div className="col-lg-6">
-                                            <div>Total Margin Balance:</div>
-                                            <h3>0.00095000 BTC≈$3570</h3>
-                                            <div className="mt-3 pt-3 text-uppercase text-muted pt-2 small">Locked:</div>
-                                            <h5>0.00000388 BTC</h5>
-                                            <div className="mt-3 text-uppercase text-muted small">Flexible:</div>
-                                            <h5>0.0000018 BTC</h5>
-                                        </div>
-                                        <div className="col-lg-6" style={{ position: 'relative' }}>
-                                            {/* <>apex chart here</>                                        */}
-                                            <Chart
-                                                options={circleChart}
-                                                series={seriesCircleChart}
-                                                type="radialBar"
-                                                height="300"
-                                            />
-                                            <div className="resize-triggers"><div className="expand-trigger"><div style={{ width: '1px', height: '1px' }}></div></div><div className="contract-trigger"></div></div></div>
-                                    </div>
-                                </Tab.Pane>
                             </Tab.Content>
                         </div>
                     </Tab.Container>
@@ -322,8 +229,7 @@ function BalanceDetail() {
             <div className="col-xl-12 col-xxl-5">
                 <div className="card">
                     <div className="card-header py-3 d-flex justify-content-between bg-transparent align-items-center">
-                        <h6 className="mb-0 fw-bold">Increase your account security</h6>
-                        <Link to={process.env.PUBLIC_URL +"/security-page"} className="d-inline-flex"><i className="icofont-caret-right fs-5"></i></Link>
+                        <h6 className="mb-0 fw-bold">Goals</h6>
                     </div>
                     <div className="card-body">
                         <div className="row row-cols-2 g-0">
@@ -332,8 +238,9 @@ function BalanceDetail() {
                                     <div className="d-flex align-items-start px-2 py-3">
                                         <div className="dot-green mx-2 my-2"></div>
                                         <div className="d-flex flex-column">
-                                            <span className="flex-fill text-truncate">Enable 2FA</span>
-                                            <span>Enabled</span>
+                                            <span className="flex-fill text-truncate">Profit Goal:</span>
+                                            <span>$ 6.000</span>
+                                            <span>In progress</span>
                                         </div>
                                     </div>
                                 </div>
@@ -343,52 +250,9 @@ function BalanceDetail() {
                                     <div className="d-flex align-items-start px-2 py-3">
                                         <div className="dot-green mx-2 my-2"></div>
                                         <div className="d-flex flex-column">
-                                            <span className="flex-fill text-truncate">Identity Verification</span>
-                                            <span>Verified</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="col">
-                                <div className="security border-bottom border-end">
-                                    <div className="d-flex align-items-start px-2 py-3">
-                                        <div className="dot-red mx-2 my-2"></div>
-                                        <div className="d-flex flex-column">
-                                            <span className="flex-fill text-truncate">Anti-phishing Code</span>
-                                            <Link to={process.env.PUBLIC_URL +"/security-page"} className="text-decoration-underline">Setup</Link>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="col">
-                                <div className="security border-bottom">
-                                    <div className="d-flex align-items-start px-2 py-3">
-                                        <div className="dot-red mx-2 my-2"></div>
-                                        <div className="d-flex flex-column">
-                                            <span className="flex-fill text-truncate">Withdrawal Whitelist</span>
-                                            <Link to={process.env.PUBLIC_URL +"/security-page"} className="text-decoration-underline">Turn on</Link>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="col">
-                                <div className="security border-bottom border-end">
-                                    <div className="d-flex align-items-start px-2 py-3">
-                                        <div className="dot-red mx-2 my-2"></div>
-                                        <div className="d-flex flex-column">
-                                            <span className="flex-fill text-truncate">Security Key</span>
-                                            <Link to={process.env.PUBLIC_URL +"/security-page"} className="text-decoration-underline">Setup</Link>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="col">
-                                <div className="security border-bottom">
-                                    <div className="d-flex align-items-start px-2 py-3">
-                                        <div className="dot-red mx-2 my-2"></div>
-                                        <div className="d-flex flex-column">
-                                            <span className="flex-fill text-truncate">Google Authenticator</span>
-                                            <Link to={process.env.PUBLIC_URL +"/security-page"} className="text-decoration-underline">Setup</Link>
+                                            <span className="flex-fill text-truncate">EOD Drawdown</span>
+                                            <span>$ 3.500</span>
+                                            <span>In progress</span>
                                         </div>
                                     </div>
                                 </div>
@@ -398,8 +262,10 @@ function BalanceDetail() {
                                     <div className="d-flex align-items-start px-2 py-3">
                                         <div className="dot-green mx-2 my-2"></div>
                                         <div className="d-flex flex-column">
-                                            <span className="flex-fill text-truncate">Phone Number</span>
-                                            <span>74****57</span>
+                                            <span className="flex-fill text-truncate">Max Daily Loss</span>
+                                            <span>$ 2.000</span>
+                                            <span>In progress</span>
+
                                         </div>
                                     </div>
                                 </div>
@@ -409,8 +275,21 @@ function BalanceDetail() {
                                     <div className="d-flex align-items-start px-2 py-3">
                                         <div className="dot-green mx-2 my-2"></div>
                                         <div className="d-flex flex-column">
-                                            <span className="flex-fill text-truncate">Email Address </span>
-                                            <span>ni***@gmail.com</span>
+                                            <span className="flex-fill text-truncate">Maintain Consistency</span>
+                                            <span>0 %</span>
+                                            <span>In progress</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="col">
+                                <div className="security ">
+                                    <div className="d-flex align-items-start px-2 py-3">
+                                        <div className="dot-green mx-2 my-2"></div>
+                                        <div className="d-flex flex-column">
+                                            <span className="flex-fill text-truncate">Trade a Minimum of 15 Trading Days</span>
+                                            <span>0 %</span>
+                                            <span>Num Days: 0</span>
                                         </div>
                                     </div>
                                 </div>
