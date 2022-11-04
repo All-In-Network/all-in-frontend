@@ -9,14 +9,12 @@ import UserDetailcard from '../../Component/DashboardOne/UserDetailcard';
 function Dashboard() {
     return (
         <div className='container-xxl'>
-            <UserDetailcard />
-            <ChartSmallCard />
+            
+            {/* <ChartSmallCard /> */}
             <BalanceDetail />
             <div className='row g-3 mb-3 row-deck'>
-                <CoinValue />
-                <LoginActivity />
+                
             </div>
-            <RecentTransaction />
         </div>
     )
 }

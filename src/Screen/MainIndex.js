@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Switch, Route, Routes, useNavigate } from 'react-router-dom';
+import { Route, Routes, useNavigate } from 'react-router-dom';
 import { onModalOpen, onChangeDarkMode, onChangeHighcontrast, OnchangeRTLmode } from '../Redux/Actions/Actions';
 import Header from '../Component/Comman/Header';
 import Dashboard from './Dashboard/Dashboard';

@@ -6,7 +6,6 @@ function Apex(props) {
   const [series, setSeries] = useState(props.data.chartData ? props.data.chartData.series : "")
   return (
     <div className="">
-     
         {options ? <Chart
           options={options}
           series={series}
