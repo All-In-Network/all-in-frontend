@@ -29,7 +29,8 @@ export const CandleChart = ({
 
     useEffect(() => {
         async function getInitCandles() {
-            const BarsUrl = "https://data.alpaca.markets/v1beta2/crypto/bars?symbols=BTC/USD&timeframe=1Min&start=2022-01-10";
+            var start = new Date(Date.now() - (7200 * 1000)).toISOString();
+            const BarsUrl = `https://data.alpaca.markets/v1beta2/crypto/bars?symbols=BTC/USD&timeframe=1Min&start=${start}`;
 
             fetch(BarsUrl, {
                 headers: {
