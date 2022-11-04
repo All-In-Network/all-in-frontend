@@ -14,15 +14,14 @@ function Header(props) {
                     <div className="h-right d-flex align-items-center mr-5 mr-lg-0 order-1">
                         <Dropdown className="dropdown user-profile ml-2 ml-sm-3 d-flex align-items-center mx-2 mx-lg-3">
                             <Dropdown.Toggle as='dd' className="nav-link dropdown-toggle pulse p-0" role="button" data-bs-toggle="dropdown" data-bs-display="static">
-                                <img className="avatar lg rounded-circle img-thumbnail" src={Profile} alt="profile" />
+                                <img className="avatar lg rounded-circle img-thumbnail" src={`https://gateway.pinata.cloud/ipfs/QmfWBWsdtQErNxMHb2UfWBQHTwbTEdCUMetpwR4y9uDNp3`} alt="profile" />
                             </Dropdown.Toggle>
                             <Dropdown.Menu className="dropdown-menu rounded-lg shadow border-0 dropdown-animation dropdown-menu-end p-0 m-0">
                                 <div className="card border-0 w280">
                                     <div className="card-body pb-0">
                                         <div className="d-flex py-1">
-                                            <img className="avatar rounded-circle" src={Profile} alt="profile" />
                                             <div className="flex-fill ms-3">
-                                                <p className="mb-0"><span className="font-weight-bold">Nickname</span></p>
+                                                <p className="mb-1"><span className="font-weight-bold">Nickname</span></p>
                                             </div>
                                         </div>
 
