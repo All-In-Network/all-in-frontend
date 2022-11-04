@@ -1,5 +1,3 @@
-import { useNavigate } from 'react-router-dom';
-
 export const onModalOpen = (val) => (dispatch) => {
     dispatch({
         type: 'MODAL_OPEN',
