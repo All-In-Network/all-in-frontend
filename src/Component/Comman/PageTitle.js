@@ -6,7 +6,7 @@ import { Tab, Nav } from 'react-bootstrap';
 function PageTitle(props) {
     const [rewardModel, setRewardModel] = useState(false);
     const [caleModel, setCaleModel] = useState(false);
-    const { pagetitle, downloadbutton, reportbutton, sidebutton, p2pheader, Calendermodal, reward } = props;
+    const { pagetitle, p2pheader, Calendermodal, reward } = props;
     return (
         <div className="container-xxl">
             <div className="row align-items-center g-2">
@@ -20,13 +20,6 @@ function PageTitle(props) {
                             <Nav.Item className="nav-item"><Nav.Link className="nav-link sell" eventKey='second' data-bs-toggle="tab" href="#Sell" role="tab" aria-selected="false">Sell</Nav.Link></Nav.Item>
                         </Nav>
                     </div> : null
-                }
-                {
-                    sidebutton ? null :
-                        <div className="col-12 col-md-6 text-md-end">
-                            <a href="https://themeforest.net/user/pixelwibes" title="Download" className="btn btn-white border lift me-1">{downloadbutton}</a>
-                            <button type="button" className="btn btn-dark lift">{reportbutton}</button>
-                        </div>
                 }
                 {
                     Calendermodal ? <div className="col-auto">

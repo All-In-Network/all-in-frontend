@@ -1,14 +1,14 @@
 import React from "react";
-import { Switch, Route, Routes } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { onModalOpen } from '../Redux/Actions/Actions';
 import AuthHeader from "../Component/Comman/AuthHeader";
 import Signin from "../Component/Auth/SignIn";
 import NewModal from "../Component/Comman/NewModal";
-import Signup from "../Component/Auth/Signup";
+/* import Signup from "../Component/Auth/Signup";
 import ForgotPassword from "../Component/Auth/ForgotPassword";
 import Verification from "../Component/Auth/Verification";
-import ErrorPage from "../Component/Auth/ErrorPage";
+import ErrorPage from "../Component/Auth/ErrorPage"; */
 
 function AuthIndex(props) {
     const { modalopen, darkMode, highcontrast, rtlmode } = props.Mainreducer;
@@ -29,10 +29,10 @@ function AuthIndex(props) {
             />
             <Routes>
                 <Route exact path={baseUrl+'/sign-in'} element={<Signin />} />
-                <Route exact path={baseUrl+"/sign-up"} element={<Signup />} />
+                {/* <Route exact path={baseUrl+"/sign-up"} element={<Signup />} />
                 <Route exact path={baseUrl+"/forgot-password"} element={<ForgotPassword />} />
                 <Route exact path={baseUrl+"/verification"} element={<Verification />} />
-                <Route exact path={baseUrl+"/404page"} element={<ErrorPage />} />
+                <Route exact path={baseUrl+"/404page"} element={<ErrorPage />} /> */}
             </Routes>
         </div>
     )
