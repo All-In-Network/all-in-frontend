@@ -1,9 +1,7 @@
 import React from "react";
 import { Dropdown, Nav, Tab } from "react-bootstrap";
-import { Link } from "react-router-dom";
-import AuthRight from "./AuthRight";
 
-function Signin() {
+function ConnectWallet() {
     return (<>
         <div className="body d-flex p-0 p-xl-5">
             <div className="container">
@@ -32,4 +30,4 @@ function Signin() {
     </>
     )
 }
-export default Signin;
+export default ConnectWallet;

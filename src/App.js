@@ -21,7 +21,7 @@ function App(props) {
     const activeKey1 = res;
     return activeKey1
   }
-  if (activekey() === '/sign-in' || activekey() === '/sign-up' || activekey() === '/forgot-password' || activekey() === '/verification' || activekey() === '/404page') {
+  if (activekey() === '/connect' || activekey() === '/register' || activekey() === '/404page') {
     return (
       <div id="cryptoon-layout" className='theme-orange'>
         <AuthIndex />

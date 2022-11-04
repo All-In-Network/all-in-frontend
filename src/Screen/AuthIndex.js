@@ -3,16 +3,13 @@ import { Route, Routes } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { onModalOpen } from '../Redux/Actions/Actions';
 import AuthHeader from "../Component/Comman/AuthHeader";
-import Signin from "../Component/Auth/SignIn";
+import ConnectWallet from "../Component/Auth/ConnectWallet";
 import NewModal from "../Component/Comman/NewModal";
-/* import Signup from "../Component/Auth/Signup";
-import ForgotPassword from "../Component/Auth/ForgotPassword";
-import Verification from "../Component/Auth/Verification";
-import ErrorPage from "../Component/Auth/ErrorPage"; */
+import RegisterSoulbound from "../Component/Auth/Register";
 
 function AuthIndex(props) {
     const { modalopen, darkMode, highcontrast, rtlmode } = props.Mainreducer;
-    const baseUrl =process.env.PUBLIC_URL;
+    const baseUrl = process.env.PUBLIC_URL;
     return (
         <div className="main p-2 py-3 p-xl-5">
             <AuthHeader
@@ -28,11 +25,8 @@ function AuthIndex(props) {
                 OnchangeRTLmode={() => { props.OnchangeRTLmode(rtlmode === 'rtl_mode' ? true : false) }}
             />
             <Routes>
-                <Route exact path={baseUrl+'/sign-in'} element={<Signin />} />
-                {/* <Route exact path={baseUrl+"/sign-up"} element={<Signup />} />
-                <Route exact path={baseUrl+"/forgot-password"} element={<ForgotPassword />} />
-                <Route exact path={baseUrl+"/verification"} element={<Verification />} />
-                <Route exact path={baseUrl+"/404page"} element={<ErrorPage />} /> */}
+                <Route exact path={baseUrl+'/connect'} element={<ConnectWallet />} />
+                <Route exact path={baseUrl+"/register"} element={<RegisterSoulbound />} />
             </Routes>
         </div>
     )

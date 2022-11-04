@@ -1,6 +1,6 @@
 import React from "react";
 import PageTitle from "../../Component/Comman/PageTitle";
-import Profile from "../../Component/Marketplace/Nft";
+import Nftcard from "../../Component/Marketplace/Nftcard";
 import ProfileSetting from "../../Component/Marketplace/ProfileSetting";
 
 function Marketplace() {
@@ -11,7 +11,7 @@ function Marketplace() {
             <div className="container-xxl">
                 <div className='row g-3'>
                     <div className='col-xl-4 col-lg-5 col-md-12'>
-                        <Profile />
+                        <Nftcard />
                     </div>
                     <div className='col-xl-8 col-lg-7 col-md-12'>
                         <ProfileSetting />

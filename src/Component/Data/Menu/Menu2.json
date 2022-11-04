@@ -25,9 +25,9 @@
             "isApp": false,
             "children": [
                 {
-                    "name": "SignIn",
-                    "routerLink": ["sign-in"],
-                    "identifier": "SignIn",
+                    "name": "ConnectWallet",
+                    "routerLink": ["connect"],
+                    "identifier": "Connect",
                     "iconClass": "icofont-ui-home",
                     "breadcrumbMessage": "Welcome to Analytics Dashboard.",
                     "isCategory": false,
@@ -35,29 +35,9 @@
                     "children": []
                 },
                 {
-                    "name": "Signup",
-                    "routerLink": ["sign-up"],
-                    "identifier": "Signup",
-                    "iconClass": "icofont-ui-home",
-                    "breadcrumbMessage": "Welcome to Analytics Dashboard.",
-                    "isCategory": false,
-                    "isApp": false,
-                    "children": []
-                },
-                {
-                    "name": "Resetpassword",
-                    "routerLink": ["forgot-password"],
-                    "identifier": "Resetpassword",
-                    "iconClass": "icofont-ui-home",
-                    "breadcrumbMessage": "Welcome to Analytics Dashboard.",
-                    "isCategory": false,
-                    "isApp": false,
-                    "children": []
-                },
-                {
-                    "name": "Verification",
-                    "routerLink": ["verification"],
-                    "identifier": "Verification",
+                    "name": "RegisterSoulbound",
+                    "routerLink": ["register"],
+                    "identifier": "Resgister",
                     "iconClass": "icofont-ui-home",
                     "breadcrumbMessage": "Welcome to Analytics Dashboard.",
                     "isCategory": false,

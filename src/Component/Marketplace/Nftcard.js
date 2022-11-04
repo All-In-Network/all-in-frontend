@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { ProfileData } from '../Data/WidgetExampleData/ProfileData/ProfileData';
 import { Modal } from 'react-bootstrap';
 
-function Profile() {
+function NftCard() {
     const [ismodal, setIsmodal] = useState(false)
     return (
         <div className="card profile-card flex-column mb-3">
@@ -107,4 +107,4 @@ function Profile() {
     )
 }
 
-export default Profile;
+export default NftCard;
