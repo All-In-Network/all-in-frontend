@@ -1,9 +1,7 @@
 import React from 'react';
 import PageTitle from '../../Component/Comman/PageTitle';
 import FutureChart from '../../Component/Future/FutureChart';
-import FutureStatus from '../../Component/Future/FutureStatus';
 import FutureTrade from '../../Component/Future/FutureTrade';
-import OrderBook from '../../Component/Future/OrderBook';
 
 function Future() {
     return (
@@ -15,10 +13,6 @@ function Future() {
                 <div className='row g-3 mb-3 row-deck'>
                     <FutureChart />
                     <FutureTrade />
-                </div>
-                <div className='row g-3 mb-3'>
-                    <OrderBook />
-                    <FutureStatus />
                 </div>
             </div>
         </>
