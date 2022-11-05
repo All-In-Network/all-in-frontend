@@ -1,13 +1,29 @@
-import React, { useCallback, useState } from 'react';
-import { Button, Nav, Tab } from 'react-bootstrap';
+import React, { useCallback, useMemo, useState } from 'react';
+import { Button, Nav, Spinner, Tab } from 'react-bootstrap';
 import PageTitle from '../../Component/Comman/PageTitle';
 import { CandleChart } from '../../Component/Market/Charting';
 import {useIsConnected} from '../../hooks/useIsConnected'
+import Modal from 'react-bootstrap/Modal';
+import { useActions } from '../../hooks/wallet';
+
+const isWin = { win: "win", lost: "lost" };
+
 
 function Market() {
     useIsConnected()
 
+    const [open, setOpen] = useState(false);
+
+    const handleOpen = () => setOpen(true);
+
+    const handleClose = () => setOpen(false);
+
+    const [isLiveMarket, setIsLiveMarket] = useState(false);
+
     const [currentBar, setCurrentBar] = useState()
+
+
+    const type = useMemo(()=> Object.values(isWin)[Math.floor(Math.random() * Object.values(isWin).length)], [])
 
 
     const [state, setState] = useState({
@@ -26,18 +42,22 @@ function Market() {
         setState({...state, price: currentBar?.close})
 
         setOrder({
-            price: (currentBar?.close) + 10,
+            price: (currentBar?.close),
             amount: 650,
             type,
             status: "pending",
             pair: "BTC/USD",
           });
+
+        setTimeout(() => {
+            handleOpen();
+        }, 1500);
     }
 
     return (
         <>
             <div className="body-header border-bottom d-flex py-3 mb-3">
-                <PageTitle pagetitle='Test Market' />
+                <PageTitle pagetitle= {isLiveMarket ? "Live Market" : "Test Market"} />
             </div>
             <div className='container-xxl'>
                 <div className='row g-3 mb-3 row-deck'>
@@ -110,8 +130,61 @@ function Market() {
         </div>
                 </div>
             </div>
+
+
+            <Alert
+                show={open}
+                handleClose={handleClose}
+                customFn={() => setIsLiveMarket(true)}
+                type={type}
+            />
         </>
     )
 }
 
 export default Market;
+
+
+
+const Alert = ({show, handleClose, type, customFn}) => {
+
+
+    const [isLoading, setIsLoading] = useState(false)
+
+
+    const { createFundingAccount } = useActions();
+
+    const onClick = useCallback(() => {
+        setIsLoading(true)
+        if (type === "win") {
+          customFn();
+          createFundingAccount().finally(() => setIsLoading(false))
+        }
+        handleClose();
+        setIsLoading(false)
+      }, [createFundingAccount, customFn, handleClose, type]);
+
+    return (
+        <Modal show={show}>
+        <Modal.Header>
+          <Modal.Title>{type === "win" ? "Congratulations!" : "We are sorry :("}
+</Modal.Title>
+        </Modal.Header>
+        <Modal.Footer>
+          <Button variant="primary" onClick={onClick} disabled={isLoading}>
+          {isLoading && 
+        <React.Fragment>
+        <Spinner
+          as="span"
+          animation="grow"
+          size="sm"
+          role="status"
+          aria-hidden="true"
+        />
+        </React.Fragment>}
+            {type === "win" ? "Claim Funding Account!" : "Go to Test Dashboard"}
+          </Button>
+        </Modal.Footer>
+      </Modal>
+    )
+}
