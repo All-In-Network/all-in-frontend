@@ -10,6 +10,7 @@ import React from "react";
 import { BN } from "bn.js";
 import { config } from '../config'
 import { WalletDispatchContext, WalletStateContext } from "../Context/CreateContext/CreateContext";
+import { useNavigate } from "react-router";
 
 const keyring = new Keyring({ type: "sr25519" });
 
@@ -87,6 +88,8 @@ export const useWalletDispatch = () => {
 export const useActions = () => {
   const { api, accounts } = useWalletState();
 
+  const navigate = useNavigate()
+
   const purchaseSoulbound = async ({ nick }) => {
     try {
       const txs = [
@@ -111,6 +114,7 @@ export const useActions = () => {
               );
               alert("Transaction success");
               unsub?.();
+              navigate('/connect')
             }
           }
         );

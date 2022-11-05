@@ -8,11 +8,7 @@ function ProfileSetting() {
 
     const [loading, setLoading] = useState(false)
 
-    const [end, setEnd] = useState(false);
-
     const [nick, setNick] = useState("")
-
-    const navigate = useNavigate()
 
     const { faucet, purchaseSoulbound } = useActions()
 
@@ -34,7 +30,6 @@ function ProfileSetting() {
                 return alert("Nickname should be Greater than 8 characters");
             }
             await purchaseSoulbound({ nick });
-            setEnd(true);
            
           } catch (error) {
             console.log(error)
@@ -42,14 +37,6 @@ function ProfileSetting() {
             setLoading(false)
           }
     },[nick, purchaseSoulbound])
-
-
-    React.useEffect(() => {
-        if (end) {
-          navigate("/connect");
-        }
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-      }, [end]);
 
     return (
         <div className="card mb-3">

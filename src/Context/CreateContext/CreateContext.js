@@ -5,6 +5,7 @@ export const INITIAL_STATE = {
   soulbound: { isSoulbound: false, metadata: "" },
   accounts: undefined,
   api: undefined,
+  totalBalance: 10000
 };
 
 export const WalletStateContext = React.createContext(undefined);
@@ -43,6 +44,8 @@ function walletReducer(state, action) {
         ...state,
         soulbound: { isSoulbound, metadata: payload.metadata },
       };
+    case "UPDATE_BALANCE":
+      return {...state, totalBalance: payload.totalBalance}
     case "LOGOUT":
       return {...INITIAL_STATE}
     default:

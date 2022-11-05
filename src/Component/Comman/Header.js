@@ -1,5 +1,5 @@
 import React from 'react';
-import { Dropdown } from 'react-bootstrap';
+import { Button, Dropdown } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { useGetNickName } from '../../hooks/useGetNickName'
 import { useWalletDispatch, useWalletState } from '../../hooks/wallet';
@@ -37,14 +37,14 @@ function Header(props) {
                                         <span>{wallet}</span>
                                     </div>
                                     <div className="list-group m-2 ">
-                                        <Link to={process.env.PUBLIC_URL +"/connect"} className="list-group-item list-group-item-action border-0 ">
+                                        <Button onClick={logout} className="list-group-item list-group-item-action border-0 ">
                                             <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="24px" height="24px" viewBox="0 0 24 24" className="me-3">
                                                 <rect xmlns="http://www.w3.org/2000/svg" className="st0" width="24" height="24" style={{ fill: 'none' }} fill="none"></rect>
                                                 <path xmlns="http://www.w3.org/2000/svg" d="M20,4c0-1.104-0.896-2-2-2H6C4.896,2,4,2.896,4,4v16c0,1.104,0.896,2,2,2h12  c1.104,0,2-0.896,2-2V4z" style={{ fill: 'var(--primary-color)' }} data-st="fill:var(--chart-color4);"></path>
                                                 <path xmlns="http://www.w3.org/2000/svg" className="st0" d="M15,6.81v2.56c0.62,0.7,1,1.62,1,2.63c0,2.21-1.79,4-4,4s-4-1.79-4-4c0-1.01,0.38-1.93,1-2.63V6.81  C7.21,7.84,6,9.78,6,12c0,3.31,2.69,6,6,6c3.31,0,6-2.69,6-6C18,9.78,16.79,7.84,15,6.81z M13,6.09C12.68,6.03,12.34,6,12,6  s-0.68,0.03-1,0.09V12h2V6.09z"></path>
                                             </svg>
                                             Disconnect
-                                        </Link>
+                                        </Button>
                                     </div>
                                 </div>
                             </Dropdown.Menu>
