@@ -1,9 +1,6 @@
-import React, { useState } from 'react';
-import { ProfileData } from '../Data/WidgetExampleData/ProfileData/ProfileData';
-import { Modal } from 'react-bootstrap';
+import React from 'react';
 
 function NftCard() {
-    const [ismodal, setIsmodal] = useState(false)
     return (
         <div className="card profile-card flex-column mb-3">
             <div className="card-header py-3 d-flex justify-content-between bg-transparent border-bottom-0">
