@@ -183,7 +183,7 @@ export const CandleChart = ({
                         low: low,
                         close: close,
                     };
-                    // saveLast(candle);
+                    saveLast(candle);
                     setLastCandle(candle);
                 }
 
