@@ -29,21 +29,8 @@ function App(props) {
     );
   }
   const GotoChangeMenu = (val) => {
-    if (val === "UI Components") {
-      navigate(baseUrl + "/ui-alerts")
-      setMenuData([...menu2.menu2]);
-      // console.log([...menu2.menu2])
-    } else if (val === "changelog") {
-      navigate(baseUrl + "/ui-alerts")
-      setMenuData([...menu2.menu2]);
-    } else if (val === "documentation") {
-      navigate(baseUrl + "/ui-alerts")
-      setMenuData([...menu2.menu2]);
-    } else {
-      // props.history.push("dashboard");
-      navigate(baseUrl + '/')
+    navigate(baseUrl + '/')
       setMenuData([...menu.menu]);
-    }
   }
 
   // console.log(activekey())
