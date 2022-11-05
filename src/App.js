@@ -23,7 +23,7 @@ function App(props) {
   }
   if (activekey() === '/connect' || activekey() === '/register' || activekey() === '/404page') {
     return (
-      <div id="cryptoon-layout" className='theme-orange'>
+      <div id="cryptoon-layout" className='theme-indigo'>
         <AuthIndex />
       </div>
     );
@@ -48,7 +48,7 @@ function App(props) {
 
   // console.log(activekey())
   return (
-    <div id='cryptoon-layout' className='theme-orange'>
+    <div id='cryptoon-layout' className='theme-indigo'>
       <Sidebar
         activekey={activekey()}
         menuData={menuData}

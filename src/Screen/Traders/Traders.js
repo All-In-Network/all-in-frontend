@@ -7,6 +7,8 @@ import Row from 'react-bootstrap/Row';
 import { Button } from "react-bootstrap";
 import { TradersListData } from "../../Component/Traders/TradersData";
 
+import { useIsConnected } from '../../hooks/useIsConnected'
+
 import {
     Chart as ChartJS,
     CategoryScale,
@@ -22,6 +24,9 @@ import DataTable from "react-data-table-component";
 
 
 function Traders() {
+
+  useIsConnected()
+
     return (<>
             <div className="body-header border-bottom d-flex py-3 mb-3">
                 <PageTitle pagetitle='Traders List' sidebutton={true} />

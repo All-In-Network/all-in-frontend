@@ -6,6 +6,7 @@ function NewModal(props) {
     const [tcolor, setTcolor] = useState(false);
 
     const Changetheme = (color) => {
+        console.log(color)
         var theme = document.getElementById('cryptoon-layout');
         theme.className = `theme-${color}`
         setTcolor(!tcolor)
