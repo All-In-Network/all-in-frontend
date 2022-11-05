@@ -18,6 +18,7 @@ export const CandleChart = ({
     saveLast,
     order,
     balanceInfo,
+    setIsDisabled
 }) => {
     const elRef = useRef();
     const chartRef = useRef();
@@ -159,7 +160,7 @@ export const CandleChart = ({
 
         client.onopen = () => {
             console.log("WebSocket Client Connected");
-
+            setIsDisabled(false)
             client.send("");
         };
 
