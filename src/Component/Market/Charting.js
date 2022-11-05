@@ -88,49 +88,49 @@ export const CandleChart = ({
         return () => chartRef.current.remove();
     }, [initCandles]);
 
-    // useEffect(() => {
-    //     function createOrdeLine() {
-    //         if (Object.keys(order).length === 0) {
-    //             return;
-    //         }
+    useEffect(() => {
+        function createOrdeLine() {
+            if (Object.keys(order).length === 0) {
+                return;
+            }
 
-    //         let color = order.type === "SELL" ? "#d32f2f" : "#2e7d32";
+            let color = order.type === "SELL" ? "#d32f2f" : "#2e7d32";
 
-    //         let newLine = candlestickSeriesRef.current.createPriceLine({
-    //             price: order.price ? order.price : 0,
-    //             color: color,
-    //             lineWidth: 0,
-    //             lineStyle: 1,
-    //             axisLabelVisible: true,
-    //             title: order.type,
-    //         });
+            let newLine = candlestickSeriesRef.current.createPriceLine({
+                price: order.price ? order.price : 0,
+                color: color,
+                lineWidth: 0,
+                lineStyle: 1,
+                axisLabelVisible: true,
+                title: order.type,
+            });
 
-    //         order.line = newLine;
-    //         setOrders([...orders, order]);
-    //         priceLines.push(newLine);
-    //     }
+            order.line = newLine;
+            setOrders([...orders, order]);
+            priceLines.push(newLine);
+        }
 
-    //     createOrdeLine();
-    // }, [order]);
+        createOrdeLine();
+    }, [order]);
 
-    // useEffect(() => {
-    //     function reviewOpenOrders() {
-    //         if (orders.length === 0) {
-    //             return;
-    //         }
+    useEffect(() => {
+        function reviewOpenOrders() {
+            if (orders.length === 0) {
+                return;
+            }
 
-    //         orders.forEach((order) => {
-    //         if (order.price === balanceInfo.price && order.status === "pending") {
-    //             order.status = "done";
-    //             balanceInfo.balance -= order.amount ? order.amount : 0;
-    //             candlestickSeriesRef.current.removePriceLine(order.line);
-    //         }
-    //         });
-    //     }
+            orders.forEach((order) => {
+            if (order.price === balanceInfo.price && order.status === "pending") {
+                order.status = "done";
+                balanceInfo.balance -= order.amount ? order.amount : 0;
+                candlestickSeriesRef.current.removePriceLine(order.line);
+            }
+            });
+        }
 
-    //     reviewOpenOrders();
-    //     console.log(orders);
-    // }, [lastCandle]);
+        reviewOpenOrders();
+        console.log(orders);
+    }, [lastCandle]);
 
     useEffect(() => {
         if (
