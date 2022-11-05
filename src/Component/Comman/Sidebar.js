@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 function Sidebar(props) {
     const [isSidebarMini, setIsSidebarMini] = useState(false);
-    const navigate = useNavigate();
     const baseUrl = process.env.PUBLIC_URL;
 
     const openChildren = (id) => {
