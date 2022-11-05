@@ -1,12 +1,20 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Dropdown } from 'react-bootstrap';
-import Profile from '../../assets/images/profile_av.svg';
 import { Link } from 'react-router-dom';
+import { useGetNickName } from '../../hooks/useGetNickName'
+import { useWalletDispatch, useWalletState } from '../../hooks/wallet';
 
 
 function Header(props) {
+
+    const {nickName} = useGetNickName()
+
+    const {accounts} = useWalletState()
+
+    const {logout} = useWalletDispatch()
+
     const { onModalOpen } = props;
-    const wallet = "5Cfwbj2b9P8ovq3FJLhLNRFHPJcToduo7p3EpGfM9sRFszPH".slice(0, 20);
+    const wallet = accounts?.[0].address.slice(0, 10) + '.....' + accounts?.[0].address.slice(accounts?.[0]?.address?.length - 10)
     return (
         <div className="header">
             <nav className="navbar py-4">
@@ -21,7 +29,7 @@ function Header(props) {
                                     <div className="card-body pb-0">
                                         <div className="d-flex py-1">
                                             <div className="flex-fill ms-3">
-                                                <p className="mb-1"><span className="font-weight-bold">Nickname</span></p>
+                                                <p className="mb-1"><span className="font-weight-bold">{nickName}</span></p>
                                             </div>
                                         </div>
 

@@ -43,6 +43,8 @@ function walletReducer(state, action) {
         ...state,
         soulbound: { isSoulbound, metadata: payload.metadata },
       };
+    case "LOGOUT":
+      return {...INITIAL_STATE}
     default:
       return { ...state };
   }
