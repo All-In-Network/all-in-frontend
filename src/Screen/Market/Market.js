@@ -12,6 +12,8 @@ const isWin = { win: "win", lost: "lost" };
 function Market() {
     useIsConnected()
 
+    const [isDisabled, setIsDisabled] = useState(true)
+
     const [open, setOpen] = useState(false);
 
     const handleOpen = () => setOpen(true);
@@ -78,6 +80,7 @@ function Market() {
                                         saveLast={(val)=> saveLast(val)}
                                         balanceInfo={state}
                                         order={order}
+                                        setIsDisabled={setIsDisabled}
                                     />
                                 </div>
                             </div>
@@ -122,8 +125,8 @@ function Market() {
                                                 </div>
                                             </div>
                                             <div className="mb-3 d-flex justify-content-between">
-                                                <Button onClick={()=> transaction('BUY')} className="btn btn-light-success px-5 py-2 text-uppercase">Buy</Button>
-                                                <Button onClick={()=> transaction('SELL')} className="btn btn-light-danger px-5 py-2 text-uppercase">Sell</Button>
+                                                <Button disabled={isDisabled} onClick={()=> transaction('BUY')} className="btn btn-light-success px-5 py-2 text-uppercase">Buy</Button>
+                                                <Button disabled={isDisabled} onClick={()=> transaction('SELL')} className="btn btn-light-danger px-5 py-2 text-uppercase">Sell</Button>
                                             </div>
                                         
                                     </div>

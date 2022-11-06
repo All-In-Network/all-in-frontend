@@ -9,7 +9,9 @@ function Header(props) {
 
     const {nickName} = useGetNickName()
 
-    const {accounts} = useWalletState()
+    const {accounts, soulbound} = useWalletState()
+
+    const { metadata } = soulbound ?? {};
 
     const {logout} = useWalletDispatch()
 
@@ -21,7 +23,7 @@ function Header(props) {
                     <div className="h-right d-flex align-items-center mr-5 mr-lg-0 order-1">
                         <Dropdown className="dropdown user-profile ml-2 ml-sm-3 d-flex align-items-center mx-2 mx-lg-3">
                             <Dropdown.Toggle as='dd' className="nav-link dropdown-toggle pulse p-0" role="button" data-bs-toggle="dropdown" data-bs-display="static">
-                                <img className="avatar lg rounded-circle img-thumbnail" src={`https://gateway.pinata.cloud/ipfs/QmPHXvMi5ebs3ZDe42z8fZsRGqRj83UZ3MJovVyoVuoSHB`} alt="profile" />
+                                <img className="avatar lg rounded-circle img-thumbnail" src={`https://gateway.pinata.cloud/ipfs${metadata.split("ipfs:/")[1]}`} alt="profile" />
                             </Dropdown.Toggle>
                             <Dropdown.Menu className="dropdown-menu rounded-lg shadow border-0 dropdown-animation dropdown-menu-end p-0 m-0">
                                 <div className="card border-0 w280">
