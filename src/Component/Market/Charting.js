@@ -97,10 +97,10 @@ export const CandleChart = ({
             let color = order.type === "SELL" ? "#d32f2f" : "#2e7d32";
 
             let newLine = candlestickSeriesRef.current.createPriceLine({
-                price: order.price ? order.price : 0,
+                price: order.price,
                 color: color,
-                lineWidth: 0,
-                lineStyle: 1,
+                lineWidth: 2,
+                lineStyle: 2,
                 axisLabelVisible: true,
                 title: order.type,
             });
@@ -119,15 +119,121 @@ export const CandleChart = ({
                 return;
             }
 
+            let color;
             orders.forEach((order) => {
-            if (order.price === balanceInfo.price && order.status === "pending") {
-                order.status = "done";
-                balanceInfo.balance -= order.amount ? order.amount : 0;
-                candlestickSeriesRef.current.removePriceLine(order.line);
-            }
+                let orderType = '';
+                orderType = order.type;
+                console.log(`HERE ${orderType}`);
+
+                if (orderType == 'SELL' || orderType == 'BUY') {
+                    if (order.price === balanceInfo.price && order.status === "pending") {
+                        balanceInfo.balance -= order.amount;
+                        //candlestickSeriesRef.current.removePriceLine(order.line);
+                        order.status = 'done';
+
+                        // inverted color for stop order
+                        color = orderType == 'BUY' ? '#d32f2f' : '#2e7d32';
+                        
+                        // create line on chart
+                        let newStopLine = candlestickSeriesRef.current.createPriceLine({
+                            price: order.sl,
+                            color: color,
+                            lineWidth: 2,
+                            lineStyle: 2,
+                            axisLabelVisible: true,
+                            title: 'SL',
+                        });
+                        
+                        let type = '';
+
+                        if (orderType == 'BUY') {
+                            type = 'SL BUY';
+                        }
+                        else {
+                            type = 'SL SELL';
+                        }
+                        // create new order object
+                        let newStopOrder = {
+                            'price' : order.sl,
+                            'type'  : type,
+                            'status': 'pending',
+                            'line'  : newStopLine,
+                            'amount': order.expected,
+                            'pair'  : order.pair,
+                            'stop'  : null,
+                            'expected': order.expected * order.sl,
+                        }
+                        // setOrders([...orders, newStopOrder]);
+                        // priceLines.push(newStopLine);
+
+                        let newTPLine = candlestickSeriesRef.current.createPriceLine({
+                            price: order.tp,
+                            color: '#2e7d32',
+                            lineWidth: 2,
+                            lineStyle: 2,
+                            axisLabelVisible: true,
+                            title: 'TP',
+                        });
+
+                        if (orderType == 'BUY') {
+                            type = 'TP BUY';
+                        }
+                        else {
+                            type = 'TP SELL';
+                        }
+
+                        let newTPOrder = {
+                            'price' : order.tp,
+                            'type'  : type,
+                            'status': 'pending',
+                            'line'  : newTPLine,
+                            'amount': order.expected,
+                            'pair'  : order.pair,
+                            'stop'  : null,
+                            'expected': order.expected * order.tp,
+                        }
+
+                        setOrders([...orders, newStopOrder, newTPOrder]);
+                        priceLines.push(newStopLine);
+                    }
+
+                } else if (orderType.toString().includes('TP')) {
+
+                    // buy
+                    if (orderType == 'TP BUY') {
+                        if (order.price >= balanceInfo.price && order.status == 'pending') {
+                            balanceInfo.balance += order.expected;
+                            order.status = 'done';
+                            alert("GANASTE");
+                        }
+                    } else { // sell
+                        if (order.price <= balanceInfo.price && order.status == 'pending') {
+                            balanceInfo.balance += order.expected;
+                            order.status = 'done';
+                            alert("GANASTE");
+                        }
+                    }
+                } else if (orderType.toString().includes('SL')) {
+                    // buy
+                    if (orderType == 'SL BUY') {
+                        if (order.price <= balanceInfo.price && order.status == 'pending') {
+                            balanceInfo.balance += order.expected;
+                            order.status = 'done';
+                            orders.forEach((order => candlestickSeriesRef.current.removePriceLine(order.line)));
+                            orders = [];
+                        }
+                    } else {  // sell
+                        if (order.price >= balanceInfo.price && order.status == 'pending') {
+                            balanceInfo.balance += order.expected;
+                            order.status = 'done';
+                            orders.forEach((order => candlestickSeriesRef.current.removePriceLine(order.line)));
+                            orders = [];
+                        }
+                    }
+                }
             });
         }
-
+    
         reviewOpenOrders();
         console.log(orders);
     }, [lastCandle]);
@@ -207,6 +313,19 @@ export const CandleChart = ({
 
         return () => client.close();
     }, []);
+
+    function newOrderLine(price, color, type) {
+        let newLine = candlestickSeriesRef.current.createPriceLine({
+            price: price,
+            color: color,
+            lineWidth: 2,
+            lineStyle: 2,
+            axisLabelVisible: true,
+            title: type,
+        });
+
+        return newLine
+    }
 
     return (
         <div ref={elRef}></div>

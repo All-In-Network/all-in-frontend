@@ -41,17 +41,23 @@ function Market() {
     const transaction = (type) => {
         setState({...state, price: currentBar?.close})
 
+        let amount = 500;
+        let expected = amount / (currentBar?.close);
+
         setOrder({
             price: (currentBar?.close),
-            amount: 650,
-            type,
+            amount: amount,
+            type: type,
             status: "pending",
             pair: "BTC/USD",
+            sl: type == "BUY" ? (currentBar?.close) - 2 : (currentBar?.close) + 2,
+            tp: type == "BUY" ? (currentBar?.close) + 2 : (currentBar?.close) - 2,
+            expected: expected
           });
 
-        setTimeout(() => {
-            handleOpen();
-        }, 1500);
+        // setTimeout(() => {
+        //     handleOpen();
+        // }, 1500);
     }
 
     return (
@@ -99,7 +105,7 @@ function Market() {
                                     <div className="col-lg-12">
                                         <div className="d-flex align-items-center justify-content-between my-3">
                                             <span className="small text-muted">Avbl</span>
-                                            <span className="">10.000 USD</span>
+                                            <span className="">{state.balance}</span>
                                         </div>
                                        
                                             <div className="input-group mb-3">
