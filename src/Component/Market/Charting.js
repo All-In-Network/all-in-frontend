@@ -95,7 +95,11 @@ export const CandleChart = ({
                 return;
             }
 
-            let color = order.type === "SELL" ? "#d32f2f" : "#2e7d32";
+            let orderType = '';
+            orderType = order.type;
+            
+            let color = orderType === "SELL" ? "#d32f2f" : "#2e7d32";
+            let type  = '';
 
             let newLine = candlestickSeriesRef.current.createPriceLine({
                 price: order.price,
@@ -106,9 +110,66 @@ export const CandleChart = ({
                 title: order.type,
             });
 
-            order.line = newLine;
-            setOrders([...orders, order]);
-            priceLines.push(newLine);
+            balanceInfo.balance -= order.amount;
+            order.status = 'done';
+            order.line   = newLine;
+
+            // inverted color for stop order
+            color = orderType == 'BUY' ? '#d32f2f' : '#2e7d32';
+                        
+            // create stop loss line on chart
+            let newStopLine = candlestickSeriesRef.current.createPriceLine({
+                price: order.sl,
+                color: color,
+                lineWidth: 2,
+                lineStyle: 2,
+                axisLabelVisible: true,
+                title: 'SL',
+            });
+            
+            type = orderType == 'BUY' ? 'SL BUY' : 'SL SELL';
+
+            // create new order object
+            let newStopOrder = {
+                'price' : order.sl,
+                'type'  : type,
+                'status': 'pending',
+                'line'  : newStopLine,
+                'amount': order.expected,
+                'pair'  : order.pair,
+                'sl'    : null,
+                'tp'    : null,
+                'expected': order.expected * order.sl,
+            }
+
+            let newTPLine = candlestickSeriesRef.current.createPriceLine({
+                price: order.tp,
+                color: '#2e7d32',
+                lineWidth: 2,
+                lineStyle: 2,
+                axisLabelVisible: true,
+                title: 'TP',
+            });
+
+            type = orderType == 'BUY' ? 'TP BUY' : 'TP SELL';
+
+            let newTPOrder = {
+                'price' : order.tp,
+                'type'  : type,
+                'status': 'pending',
+                'line'  : newTPLine,
+                'amount': order.expected,
+                'pair'  : order.pair,
+                'sl'    : null,
+                'tp'    : null,
+                'expected': order.expected * order.tp,
+            }
+
+            setOrders([...orders, order, newStopOrder, newTPOrder]);
+            priceLines.push(newStopLine);
+
+            // setOrders([...orders, order]);
+            // priceLines.push(newLine);
         }
 
         createOrdeLine();
@@ -120,88 +181,15 @@ export const CandleChart = ({
                 return;
             }
 
-            let color;
             orders.forEach((order) => {
                 let orderType = '';
                 orderType = order.type;
                 console.log(`HERE ${orderType}`);
 
-                if (orderType == 'SELL' || orderType == 'BUY') {
-                    if (order.status === "pending") {
-                        balanceInfo.balance -= order.amount;
-                        order.status = 'done';
-
-                        // inverted color for stop order
-                        color = orderType == 'BUY' ? '#d32f2f' : '#2e7d32';
-                        
-                        // create line on chart
-                        let newStopLine = candlestickSeriesRef.current.createPriceLine({
-                            price: order.sl,
-                            color: color,
-                            lineWidth: 2,
-                            lineStyle: 2,
-                            axisLabelVisible: true,
-                            title: 'SL',
-                        });
-                        
-                        let type = '';
-
-                        if (orderType == 'BUY') {
-                            type = 'SL BUY';
-                        }
-                        else {
-                            type = 'SL SELL';
-                        }
-                        
-                        // create new order object
-                        let newStopOrder = {
-                            'price' : order.sl,
-                            'type'  : type,
-                            'status': 'pending',
-                            'line'  : newStopLine,
-                            'amount': order.expected,
-                            'pair'  : order.pair,
-                            'sl'    : null,
-                            'tp'    : null,
-                            'expected': order.expected * order.sl,
-                        }
-
-                        let newTPLine = candlestickSeriesRef.current.createPriceLine({
-                            price: order.tp,
-                            color: '#2e7d32',
-                            lineWidth: 2,
-                            lineStyle: 2,
-                            axisLabelVisible: true,
-                            title: 'TP',
-                        });
-
-                        if (orderType == 'BUY') {
-                            type = 'TP BUY';
-                        }
-                        else {
-                            type = 'TP SELL';
-                        }
-
-                        let newTPOrder = {
-                            'price' : order.tp,
-                            'type'  : type,
-                            'status': 'pending',
-                            'line'  : newTPLine,
-                            'amount': order.expected,
-                            'pair'  : order.pair,
-                            'sl'    : null,
-                            'tp'    : null,
-                            'expected': order.expected * order.tp,
-                        }
-
-                        setOrders([...orders, newStopOrder, newTPOrder]);
-                        priceLines.push(newStopLine);
-                    }
-
-                } else if (orderType == 'TP BUY' || order == 'TP SELL') {
+                console.log(lastCandle.close, order.price)
+                if (orderType == 'TP BUY' || orderType == 'TP SELL') {
 
                     // buy
-                    console.log(lastCandle.close, order.price)
                     if (orderType == 'TP BUY') {
                         if (lastCandle.close >= order.price && order.status == 'pending') {
                             balanceInfo.balance += order.expected + 10;
@@ -210,9 +198,9 @@ export const CandleChart = ({
                             setOrders([]);
                             alert("GANASTE");
                         }
-                    } else { // sell
-                        console.log("HEREEE")
+                    } else if (orderType == 'TP SELL') {
                         if (lastCandle.close <= order.price && order.status == 'pending') {
+                            console.log("ESTAMOS EN TP SELL")
                             balanceInfo.balance += order.expected + 10;
                             order.status = 'done';
                             orders.forEach((order => candlestickSeriesRef.current.removePriceLine(order.line)));
@@ -222,7 +210,6 @@ export const CandleChart = ({
                     }
                 } else if (orderType == 'SL BUY' || orderType == 'SL SELL') {
                     if (orderType == 'SL BUY') {
-                        console.log(lastCandle.close, order.price)
                         if (lastCandle.close <= order.price && order.status == 'pending') {
                             balanceInfo.balance += order.expected - 10;
                             order.status = 'done';

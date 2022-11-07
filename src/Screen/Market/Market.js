@@ -52,8 +52,8 @@ function Market() {
             type: type,
             status: "pending",
             pair: "BTC/USD",
-            sl: type == "BUY" ? (currentBar?.close) - 2 : (currentBar?.close) + 2,
-            tp: type == "BUY" ? (currentBar?.close) + 2 : (currentBar?.close) - 2,
+            sl: type == "BUY" ? (currentBar?.close) - 5 : (currentBar?.close) + 5,
+            tp: type == "BUY" ? (currentBar?.close) + 5 : (currentBar?.close) - 5,
             expected: expected
           });
 
