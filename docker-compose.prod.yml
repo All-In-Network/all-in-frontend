@@ -1,0 +1,11 @@
+version: "3.8"
+
+services:
+  all-in-frontend:
+    container_name: all-in-frontend-prod
+    image: all-in-frontend-prod:latest
+    volumes:
+      - ./build:/app/build
+    build:
+      context: .
+      target: production
