@@ -127,9 +127,8 @@ export const CandleChart = ({
                 console.log(`HERE ${orderType}`);
 
                 if (orderType == 'SELL' || orderType == 'BUY') {
-                    if (order.price === balanceInfo.price && order.status === "pending") {
+                    if (order.status === "pending") {
                         balanceInfo.balance -= order.amount;
-                        //candlestickSeriesRef.current.removePriceLine(order.line);
                         order.status = 'done';
 
                         // inverted color for stop order
@@ -153,6 +152,7 @@ export const CandleChart = ({
                         else {
                             type = 'SL SELL';
                         }
+                        
                         // create new order object
                         let newStopOrder = {
                             'price' : order.sl,
@@ -161,11 +161,10 @@ export const CandleChart = ({
                             'line'  : newStopLine,
                             'amount': order.expected,
                             'pair'  : order.pair,
-                            'stop'  : null,
+                            'sl'    : null,
+                            'tp'    : null,
                             'expected': order.expected * order.sl,
                         }
-                        // setOrders([...orders, newStopOrder]);
-                        // priceLines.push(newStopLine);
 
                         let newTPLine = candlestickSeriesRef.current.createPriceLine({
                             price: order.tp,
@@ -190,7 +189,8 @@ export const CandleChart = ({
                             'line'  : newTPLine,
                             'amount': order.expected,
                             'pair'  : order.pair,
-                            'stop'  : null,
+                            'sl'    : null,
+                            'tp'    : null,
                             'expected': order.expected * order.tp,
                         }
 
@@ -198,37 +198,45 @@ export const CandleChart = ({
                         priceLines.push(newStopLine);
                     }
 
-                } else if (orderType.toString().includes('TP')) {
+                } else if (orderType == 'TP BUY' || order == 'TP SELL') {
 
                     // buy
+                    console.log(lastCandle.close, order.price)
                     if (orderType == 'TP BUY') {
-                        if (order.price >= balanceInfo.price && order.status == 'pending') {
-                            balanceInfo.balance += order.expected;
+                        if (lastCandle.close >= order.price && order.status == 'pending') {
+                            balanceInfo.balance += order.expected + 10;
                             order.status = 'done';
+                            orders.forEach((order => candlestickSeriesRef.current.removePriceLine(order.line)));
+                            setOrders([]);
                             alert("GANASTE");
                         }
                     } else { // sell
-                        if (order.price <= balanceInfo.price && order.status == 'pending') {
-                            balanceInfo.balance += order.expected;
+                        console.log("HEREEE")
+                        if (lastCandle.close <= order.price && order.status == 'pending') {
+                            balanceInfo.balance += order.expected + 10;
                             order.status = 'done';
+                            orders.forEach((order => candlestickSeriesRef.current.removePriceLine(order.line)));
+                            setOrders([]);
                             alert("GANASTE");
                         }
                     }
-                } else if (orderType.toString().includes('SL')) {
-                    // buy
+                } else if (orderType == 'SL BUY' || orderType == 'SL SELL') {
                     if (orderType == 'SL BUY') {
-                        if (order.price <= balanceInfo.price && order.status == 'pending') {
-                            balanceInfo.balance += order.expected;
+                        console.log(lastCandle.close, order.price)
+                        if (lastCandle.close <= order.price && order.status == 'pending') {
+                            balanceInfo.balance += order.expected - 10;
                             order.status = 'done';
                             orders.forEach((order => candlestickSeriesRef.current.removePriceLine(order.line)));
-                            orders = [];
+                            setOrders([]);
+                            alert("STOP LOSS ALCANZADO");
                         }
                     } else {  // sell
-                        if (order.price >= balanceInfo.price && order.status == 'pending') {
-                            balanceInfo.balance += order.expected;
+                        if (lastCandle.close >=  order.price && order.status == 'pending') {
+                            balanceInfo.balance += order.expected - 10;
                             order.status = 'done';
                             orders.forEach((order => candlestickSeriesRef.current.removePriceLine(order.line)));
-                            orders = [];
+                            setOrders([]);
+                            alert("STOP LOSS ALCANZADO");
                         }
                     }
                 }

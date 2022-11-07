@@ -108,7 +108,7 @@ function Market() {
                                     <div className="col-lg-12">
                                         <div className="d-flex align-items-center justify-content-between my-3">
                                             <span className="small text-muted">Avbl</span>
-                                            <span className="">{state.balance}</span>
+                                            <span className="">{Math.ceil(state.balance)}</span>
                                         </div>
                                        
                                             <div className="input-group mb-3">
