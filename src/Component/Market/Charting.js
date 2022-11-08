@@ -46,7 +46,6 @@ export const CandleChart = ({
             })
             .then((r) => r.json())
             .then((response) => {
-                console.log(response);
 
                 const data = response.bars["BTC/USD"].map((bar) => ({
                     open: bar.o,
@@ -56,7 +55,6 @@ export const CandleChart = ({
                     time: Date.parse(bar.t) / 1000,
                 }));
                 currentBar = data[data.length - 1];
-                console.log(data);
                 saveLast(currentBar);
                 setInitCandles(data);
             });
@@ -109,7 +107,6 @@ export const CandleChart = ({
             if (orders.length !== 0) {
                 orders.forEach((ord => {
                     if (ord.type === 'BUY' || ord.type === 'SELL')  {
-                        
                         if (ord.type === order.type) {
                             priceAvg  = Math.ceil(((ord.price * 1) + (order.price * 1)) / 2);
 
@@ -154,9 +151,6 @@ export const CandleChart = ({
                     title: order.type,
                 });
 
-                balance -= order.amount;
-
-
                 order.status = 'done';
                 order.line   = newLine;
 
@@ -181,11 +175,11 @@ export const CandleChart = ({
                     'type'  : type,
                     'status': 'pending',
                     'line'  : newStopLine,
-                    'amount': order.expected,
+                    'amount': order.amount,
                     'pair'  : order.pair,
                     'sl'    : null,
                     'tp'    : null,
-                    'expected': order.expected * order.sl,
+                    'expected': (order.price - order.sl),
                 }
 
                 let newTPLine = candlestickSeriesRef.current.createPriceLine({
@@ -208,7 +202,7 @@ export const CandleChart = ({
                     'pair'  : order.pair,
                     'sl'    : null,
                     'tp'    : null,
-                    'expected': order.expected * order.tp,
+                    'expected': (order.price - order.sl) * 1,
                 }
 
                 setOrders([...orders, order, newStopOrder, newTPOrder]);
@@ -235,7 +229,7 @@ export const CandleChart = ({
                     // buy
                     if (orderType === 'TP BUY') {
                         if (lastCandle.close >= order.price && order.status === 'pending') {
-                            balance += order.expected;
+                            balance = balance + order.expected;
                             order.status = 'done';
                             orders.forEach((order => candlestickSeriesRef.current.removePriceLine(order.line)));
                             setOrders([]);
@@ -244,6 +238,7 @@ export const CandleChart = ({
                         }
                     } else if (orderType === 'TP SELL') {
                         if (lastCandle.close <= order.price && order.status === 'pending') {
+                            balance = balance - (1 * (order.expected));
                             order.status = 'done';
                             orders.forEach((order => candlestickSeriesRef.current.removePriceLine(order.line)));
                             setOrders([]);
@@ -254,7 +249,7 @@ export const CandleChart = ({
                 } else if (orderType === 'SL BUY' || orderType === 'SL SELL') {
                     if (orderType === 'SL BUY') {
                         if (lastCandle.close <= order.price && order.status === 'pending') {
-                            balance += order.expected;
+                            balance = balance - (1* (order.expected));
                             order.status = 'done';
                             orders.forEach((order => candlestickSeriesRef.current.removePriceLine(order.line)));
                             setOrders([]);
@@ -263,7 +258,7 @@ export const CandleChart = ({
                         }
                     } else {  // sell
                         if (lastCandle.close >=  order.price && order.status === 'pending') {
-                            balance += order.expected;
+                            balance = balance - (-1* (order.expected));
                             order.status = 'done';
                             orders.forEach((order => candlestickSeriesRef.current.removePriceLine(order.line)));
                             setOrders([]);
@@ -276,7 +271,6 @@ export const CandleChart = ({
         }
     
         reviewOpenOrders();
-        console.log(orders);
     }, [lastCandle]);
 
     useEffect(() => {

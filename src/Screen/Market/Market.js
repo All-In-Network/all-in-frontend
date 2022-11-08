@@ -9,7 +9,6 @@ import { useWalletDispatch, useWalletState } from "../../hooks/wallet";
 
 const isWin = { win: "win", lost: "lost" };
 
-
 function Market() {
     useIsConnected()
 
@@ -52,16 +51,14 @@ function Market() {
     const transaction = (type) => {
         setState({...state, price: currentBar?.close})
 
-        let amount = 500;
+        let amount = 1;
         setBalance({totalBalance: totalBalance});
         let expected = amount / (currentBar?.close);
         let curPrice = (currentBar?.close);
 
-
-        let def = 20;
+        let def = 40;
         let sl  = 0;
         let tp  = 0;
-
 
         if (SLInput) {
             setSLInput(parseInt(SLInput));
@@ -85,10 +82,6 @@ function Market() {
             tp: parseInt(tp),
             expected: expected
         });
-
-        // setTimeout(() => {
-        //     handleOpen();
-        // }, 1500);
     }
 
     return (

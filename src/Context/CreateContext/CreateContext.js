@@ -45,7 +45,6 @@ function walletReducer(state, action) {
         soulbound: { isSoulbound, metadata: payload.metadata },
       };
     case "SET_BALANCE":
-      console.log(payload)
       return {...state, totalBalance: payload.totalBalance}
     case "LOGOUT":
       return {...INITIAL_STATE}
