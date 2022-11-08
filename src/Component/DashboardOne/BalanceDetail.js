@@ -1,9 +1,12 @@
 import React, { useState } from 'react';
 import { Tab } from 'react-bootstrap';
 import Chart from "react-apexcharts";
+import { useWalletState } from '../../hooks/wallet';
 
 
 function BalanceDetail() {
+
+
     const [options, setOptions] = useState({
         chart: {
             height: 250,
@@ -187,6 +190,11 @@ function BalanceDetail() {
         labels: ['Cricket'],
     });
     const[seriesCircleChart,setSeriesCircleChart]=useState([70])
+
+
+
+    const { totalBalance } = useWalletState()
+
     return (
         <div className='row g-3 mb-3 row-deck'>
             <div className="col-xl-12 col-xxl-5">
@@ -273,7 +281,7 @@ function BalanceDetail() {
                                     <div className="row g-3">
                                         <div className="col-lg-6">
                                             <div>Account balance:</div>
-                                            <h3>$ 10.000</h3>
+                                            <h3>{totalBalance}</h3>
                                             <div className="mt-3 pt-3 text-uppercase text-muted pt-2 small">Min Balance:</div>
                                             <h5>$ 9.600</h5>
                                             <div className="mt-3 text-uppercase text-muted small">Total profit:</div>

@@ -30,7 +30,6 @@ function Market() {
 
     const { totalBalance } = useWalletState()
     const { setBalance } = useWalletDispatch()
-    console.log(totalBalance)
     const [state, setState] = useState({
         balance: 10000,
         price: 0,
@@ -54,7 +53,8 @@ function Market() {
         let expected = amount / (currentBar?.close);
         let curPrice = (currentBar?.close);
 
-        let def = 5;
+
+        let def = 3;
         let sl  = 0;
         let tp  = 0;
 
@@ -62,16 +62,14 @@ function Market() {
         if (SLInput) {
             setSLInput(parseInt(SLInput));
             sl = SLInput;
-            console.log(sl)
         } else
-            sl = type == "BUY" ? curPrice - def : curPrice + def;
+            sl = type === "BUY" ? curPrice - def : curPrice + def;
 
         if (TPInput) {
             setTPInput(parseInt(TPInput));
             tp = TPInput;
-            console.log(tp)
         } else
-            tp = type == "BUY" ? curPrice + def : curPrice - def;
+            tp = type === "BUY" ? curPrice + def : curPrice - def;
 
         setOrder({
             price: curPrice,
