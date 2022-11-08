@@ -232,18 +232,18 @@ export const CandleChart = ({
                             balance = balance + order.expected;
                             order.status = 'done';
                             orders.forEach((order => candlestickSeriesRef.current.removePriceLine(order.line)));
+                            setBalance({totalBalance: balance})
                             setOrders([]);
                             handleOpenModal('win')
-                            setBalance({totalBalance: balance})
                         }
                     } else if (orderType === 'TP SELL') {
                         if (lastCandle.close <= order.price && order.status === 'pending') {
                             balance = balance - (1 * (order.expected));
                             order.status = 'done';
                             orders.forEach((order => candlestickSeriesRef.current.removePriceLine(order.line)));
+                            setBalance({totalBalance: balance})
                             setOrders([]);
                             handleOpenModal('win')
-                            setBalance({totalBalance: balance})
                         }
                     }
                 } else if (orderType === 'SL BUY' || orderType === 'SL SELL') {
@@ -252,18 +252,18 @@ export const CandleChart = ({
                             balance = balance - (1* (order.expected));
                             order.status = 'done';
                             orders.forEach((order => candlestickSeriesRef.current.removePriceLine(order.line)));
+                            setBalance({totalBalance: balance})
                             setOrders([]);
                             //handleOpenModal('')
-                            setBalance({totalBalance: balance})
                         }
                     } else {  // sell
                         if (lastCandle.close >=  order.price && order.status === 'pending') {
                             balance = balance - (-1* (order.expected));
                             order.status = 'done';
                             orders.forEach((order => candlestickSeriesRef.current.removePriceLine(order.line)));
+                            setBalance({totalBalance: balance})
                             setOrders([]);
                             //handleOpenModal('')
-                            setBalance({totalBalance: balance})
                         }
                     }
                 }
