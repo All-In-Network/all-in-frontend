@@ -1,4 +1,4 @@
-import React, { useCallback, useMemo, useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import { Button, Nav, Spinner, Tab } from 'react-bootstrap';
 import PageTitle from '../../Component/Comman/PageTitle';
 import { CandleChart } from '../../Component/Market/Charting';
@@ -53,12 +53,12 @@ function Market() {
         setState({...state, price: currentBar?.close})
 
         let amount = 500;
-        setBalance({totalBalance: totalBalance - amount});
+        setBalance({totalBalance: totalBalance});
         let expected = amount / (currentBar?.close);
         let curPrice = (currentBar?.close);
 
 
-        let def = 3;
+        let def = 20;
         let sl  = 0;
         let tp  = 0;
 

@@ -243,7 +243,7 @@ export const useActions = () => {
                 //process.exit(0);
               }
             });
-          }, 70000);
+          }, 8000);
         }, 60000);
       }
     }, 10000);
