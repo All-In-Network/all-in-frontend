@@ -233,7 +233,7 @@ export const CandleChart = ({
                             order.status = 'done';
                             orders.forEach((order => candlestickSeriesRef.current.removePriceLine(order.line)));
                             setOrders([]);
-                            //handleOpenModal('win')
+                            handleOpenModal('win')
                             setBalance({totalBalance: balance})
                         }
                     } else if (orderType === 'TP SELL') {
@@ -242,7 +242,7 @@ export const CandleChart = ({
                             order.status = 'done';
                             orders.forEach((order => candlestickSeriesRef.current.removePriceLine(order.line)));
                             setOrders([]);
-                            //handleOpenModal('win')
+                            handleOpenModal('win')
                             setBalance({totalBalance: balance})
                         }
                     }
