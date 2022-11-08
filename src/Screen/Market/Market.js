@@ -15,9 +15,15 @@ function Market() {
 
     const [isDisabled, setIsDisabled] = useState(true)
 
+    const [target, setTarget] = useState()
+
     const [open, setOpen] = useState(false);
 
-    const handleOpen = () => setOpen(true);
+    const handleOpen = (target) => {
+        setTarget(target)
+        setOpen(true)
+
+    };
 
     const handleClose = () => setOpen(false);
 
@@ -25,8 +31,6 @@ function Market() {
 
     const [currentBar, setCurrentBar] = useState()
 
-
-    const target = useMemo(()=> Object.values(isWin)[Math.floor(Math.random() * Object.values(isWin).length)], [])
 
     const { totalBalance } = useWalletState()
     const { setBalance } = useWalletDispatch()
@@ -102,6 +106,7 @@ function Market() {
                             <div style={{ position: "relative", boxSizing: "content-box", width: "100%", height: "100%", margin: "0 auto !important", padding: "0 !important", fontFamily: "-apple-system" }}>
                                 <div style={{ width: "100%", height: "100%", background: "transparent", padding: "0 !important" }}>
                                     <CandleChart
+                                        handleOpenModal={handleOpen}
                                         saveLast={(val)=> saveLast(val)}
                                         balance={totalBalance}
                                         order={order}

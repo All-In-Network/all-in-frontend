@@ -4,6 +4,7 @@ import React, {
     useState,
 } from "react";
 import { createChart } from "lightweight-charts";
+import { useWalletDispatch } from "../../hooks/wallet";
 
 const ApiKey = "PKTNGP95BJSQC9PWY5S2";
 const SecretKey = "Abu7skAWhEuro3cXfv2l8lf4HfliSLiaharsxElT";
@@ -18,7 +19,8 @@ export const CandleChart = ({
     saveLast,
     order,
     balance,
-    setIsDisabled
+    setIsDisabled,
+    handleOpenModal
 }) => {
     const elRef = useRef();
     const chartRef = useRef();
@@ -27,6 +29,9 @@ export const CandleChart = ({
     const [lastCandle, setLastCandle] = useState({});
 
     const [orders, setOrders] = useState([]);
+
+    const { setBalance } = useWalletDispatch()
+
 
     useEffect(() => {
         async function getInitCandles() {
@@ -232,14 +237,16 @@ export const CandleChart = ({
                             order.status = 'done';
                             orders.forEach((order => candlestickSeriesRef.current.removePriceLine(order.line)));
                             setOrders([]);
-                            alert("GANASTE");
+                            handleOpenModal('win')
+                            setBalance({totalBalance: balance})
                         }
                     } else if (orderType == 'TP SELL') {
                         if (lastCandle.close <= order.price && order.status == 'pending') {
                             order.status = 'done';
                             orders.forEach((order => candlestickSeriesRef.current.removePriceLine(order.line)));
                             setOrders([]);
-                            alert("GANASTE");
+                            handleOpenModal('win')
+                            setBalance({totalBalance: balance})
                         }
                     }
                 } else if (orderType == 'SL BUY' || orderType == 'SL SELL') {
@@ -249,7 +256,8 @@ export const CandleChart = ({
                             order.status = 'done';
                             orders.forEach((order => candlestickSeriesRef.current.removePriceLine(order.line)));
                             setOrders([]);
-                            alert("STOP LOSS ALCANZADO");
+                            handleOpenModal('')
+                            setBalance({totalBalance: balance})
                         }
                     } else {  // sell
                         if (lastCandle.close >=  order.price && order.status == 'pending') {
@@ -257,7 +265,8 @@ export const CandleChart = ({
                             order.status = 'done';
                             orders.forEach((order => candlestickSeriesRef.current.removePriceLine(order.line)));
                             setOrders([]);
-                            alert("STOP LOSS ALCANZADO");
+                            handleOpenModal('')
+                            setBalance({totalBalance: balance})
                         }
                     }
                 }
