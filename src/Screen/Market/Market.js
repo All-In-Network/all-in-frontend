@@ -33,27 +33,56 @@ function Market() {
         price: 0,
       });
 
-      const [order, setOrder] = useState({});
+    const [order, setOrder] = useState({});
 
     const saveLast = useCallback((value)=> {
         setCurrentBar(value)
     }, [])
 
+    const [SLInput, setSLInput] = useState('');
+    const [TPInput, setTPInput] = useState('');
+
 
     const transaction = (type) => {
         setState({...state, price: currentBar?.close})
 
+        let amount = 500;
+        let expected = amount / (currentBar?.close);
+        let curPrice = (currentBar?.close);
+        
+        let def = 5;
+        let sl  = 0;
+        let tp  = 0;
+        
+
+        if (SLInput) {
+            setSLInput(parseInt(SLInput));
+            sl = SLInput;
+            console.log(sl)
+        } else
+            sl = type == "BUY" ? curPrice - def : curPrice + def;
+
+        if (TPInput) {
+            setTPInput(parseInt(TPInput));
+            tp = TPInput;
+            console.log(tp)
+        } else
+            tp = type == "BUY" ? curPrice + def : curPrice - def;
+        
         setOrder({
-            price: (currentBar?.close),
-            amount: 650,
-            type,
+            price: curPrice,
+            amount: amount,
+            type: type,
             status: "pending",
             pair: "BTC/USD",
+            sl: parseInt(sl),
+            tp: parseInt(tp),
+            expected: expected
           });
 
-        setTimeout(() => {
-            handleOpen();
-        }, 1500);
+        // setTimeout(() => {
+        //     handleOpen();
+        // }, 1500);
     }
 
     return (
@@ -102,7 +131,7 @@ function Market() {
                                     <div className="col-lg-12">
                                         <div className="d-flex align-items-center justify-content-between my-3">
                                             <span className="small text-muted">Avbl</span>
-                                            <span className="">10.000 USD</span>
+                                            <span className="">{Math.ceil(state.balance)}</span>
                                         </div>
                                        
                                             <div className="input-group mb-3">
@@ -112,10 +141,10 @@ function Market() {
                                             <div className="mb-3">
                                                 <label className="form-label">TP/SL</label>
                                                 <div className="input-group mb-3">
-                                                    <input type="text" className="form-control" placeholder="Take Profit" onChange={() => { } } />
+                                                    <input type="text" className="form-control" placeholder="Take Profit" onChange={() => { } } value={TPInput} onInput={e => setTPInput(e.target.value)}/>
                                                 </div>
                                                 <div className="input-group mb-3">
-                                                    <input type="text" className="form-control" placeholder="Stop Loss" onChange={() => { } } />
+                                                    <input type="text" className="form-control" placeholder="Stop Loss" onChange={() => { }} value={SLInput} onInput={e => setSLInput(e.target.value)} />
                                                 </div>
                                             </div>
                                             <div className="mb-3 d-flex justify-content-between">
