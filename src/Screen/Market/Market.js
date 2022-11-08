@@ -50,7 +50,7 @@ function Market() {
         setState({...state, price: currentBar?.close})
 
         let amount = 500;
-        setBalance(totalBalance - amount);
+        setBalance({totalBalance: totalBalance - amount});
         let expected = amount / (currentBar?.close);
         let curPrice = (currentBar?.close);
 

@@ -36,10 +36,10 @@ export const useWalletDispatch = () => {
     });
   };
 
-  const setBalance = (balance) => {
+  const setBalance = ({totalBalance}) => {
     dispatch({
-      type: 'UPDATE_BALANCE',
-      payload: balance,
+      type: "SET_BALANCE",
+      payload: { totalBalance },
     });
   };
 
