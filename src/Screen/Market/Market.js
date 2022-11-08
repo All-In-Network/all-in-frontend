@@ -5,6 +5,7 @@ import { CandleChart } from '../../Component/Market/Charting';
 import {useIsConnected} from '../../hooks/useIsConnected'
 import Modal from 'react-bootstrap/Modal';
 import { useActions } from '../../hooks/wallet';
+import { useWalletDispatch, useWalletState } from "../../hooks/wallet";
 
 const isWin = { win: "win", lost: "lost" };
 
@@ -25,13 +26,15 @@ function Market() {
     const [currentBar, setCurrentBar] = useState()
 
 
-    const type = useMemo(()=> Object.values(isWin)[Math.floor(Math.random() * Object.values(isWin).length)], [])
+    const target = useMemo(()=> Object.values(isWin)[Math.floor(Math.random() * Object.values(isWin).length)], [])
 
-
+    const { totalBalance } = useWalletState()
+    const { setBalance } = useWalletDispatch()
+    console.log(totalBalance)
     const [state, setState] = useState({
         balance: 10000,
         price: 0,
-      });
+    });
 
     const [order, setOrder] = useState({});
 
@@ -47,13 +50,14 @@ function Market() {
         setState({...state, price: currentBar?.close})
 
         let amount = 500;
+        setBalance(totalBalance - amount);
         let expected = amount / (currentBar?.close);
         let curPrice = (currentBar?.close);
-        
+
         let def = 5;
         let sl  = 0;
         let tp  = 0;
-        
+
 
         if (SLInput) {
             setSLInput(parseInt(SLInput));
@@ -68,7 +72,7 @@ function Market() {
             console.log(tp)
         } else
             tp = type == "BUY" ? curPrice + def : curPrice - def;
-        
+
         setOrder({
             price: curPrice,
             amount: amount,
@@ -78,7 +82,7 @@ function Market() {
             sl: parseInt(sl),
             tp: parseInt(tp),
             expected: expected
-          });
+        });
 
         // setTimeout(() => {
         //     handleOpen();
@@ -87,13 +91,13 @@ function Market() {
 
     return (
         <>
-            <div className="body-header border-bottom d-flex py-3 mb-3">
-                <PageTitle pagetitle= {isLiveMarket ? "Live Market" : "Test Market"} />
-            </div>
-            <div className='container-xxl'>
-                <div className='row g-3 mb-3 row-deck'>
-                <div className="col-xl-12 col-xxl-8">
-            <div className='col-xl-12'>
+        <div className="body-header border-bottom d-flex py-3 mb-3">
+            <PageTitle pagetitle= {isLiveMarket ? "Live Market" : "Test Market"} />
+        </div>
+        <div className='container-xxl'>
+        <div className='row g-3 mb-3 row-deck'>
+        <div className="col-xl-12 col-xxl-8">
+        <div className='col-xl-12'>
                 <div className='card'>
                     <div className='card-body'>
                         <div style={{ height: "690px" }}>
@@ -101,7 +105,7 @@ function Market() {
                                 <div style={{ width: "100%", height: "100%", background: "transparent", padding: "0 !important" }}>
                                     <CandleChart
                                         saveLast={(val)=> saveLast(val)}
-                                        balanceInfo={state}
+                                        balance={totalBalance}
                                         order={order}
                                         setIsDisabled={setIsDisabled}
                                     />
@@ -112,9 +116,6 @@ function Market() {
                 </div>
             </div>
         </div>
-
-
-
         <div className="col-xl-12 col-xxl-4">
             <div className="card">
                 <div className="card-header py-3 d-flex justify-content-between bg-transparent border-bottom-0 align-items-center">
@@ -131,9 +132,9 @@ function Market() {
                                     <div className="col-lg-12">
                                         <div className="d-flex align-items-center justify-content-between my-3">
                                             <span className="small text-muted">Avbl</span>
-                                            <span className="">{Math.ceil(state.balance)}</span>
+                                            <span className="">{Math.ceil(totalBalance)}</span>
                                         </div>
-                                       
+
                                             <div className="input-group mb-3">
                                                 <span className="input-group-text">Price</span>
                                                 <input type="text" className="form-control" placeholder="Entry Price" value={state.price} />
@@ -168,7 +169,7 @@ function Market() {
                 show={open}
                 handleClose={handleClose}
                 customFn={() => setIsLiveMarket(true)}
-                type={type}
+                type={target}
             />
         </>
     )
@@ -197,26 +198,25 @@ const Alert = ({show, handleClose, type, customFn}) => {
       }, [createFundingAccount, customFn, handleClose, type]);
 
     return (
-        <Modal show={show}>
+    <Modal show={show}>
         <Modal.Header>
-          <Modal.Title>{type === "win" ? "Congratulations!" : "We are sorry :("}
-</Modal.Title>
+            <Modal.Title>{type === "win" ? "Congratulations!" : "We are sorry :("}</Modal.Title>
         </Modal.Header>
         <Modal.Footer>
-          <Button variant="primary" onClick={onClick} disabled={isLoading}>
-          {isLoading && 
-        <React.Fragment>
-        <Spinner
-          as="span"
-          animation="grow"
-          size="sm"
-          role="status"
-          aria-hidden="true"
-        />
-        </React.Fragment>}
+            <Button variant="primary" onClick={onClick} disabled={isLoading}>
+                {isLoading &&
+                <React.Fragment>
+                    <Spinner
+                    as="span"
+                    animation="grow"
+                    size="sm"
+                    role="status"
+                    aria-hidden="true"
+                    />
+                </React.Fragment>}
             {type === "win" ? "Claim Funding Account!" : "Go to Test Dashboard"}
           </Button>
         </Modal.Footer>
-      </Modal>
+    </Modal>
     )
 }

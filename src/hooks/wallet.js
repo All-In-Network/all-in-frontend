@@ -5,8 +5,6 @@ import {
   web3FromAddress,
 } from "@polkadot/extension-dapp";
 import React from "react";
-
-
 import { BN } from "bn.js";
 import { config } from '../config'
 import { WalletDispatchContext, WalletStateContext } from "../Context/CreateContext/CreateContext";
@@ -35,6 +33,13 @@ export const useWalletDispatch = () => {
     dispatch({
       type: 'SET_ACCOUNTS',
       payload: payload,
+    });
+  };
+
+  const setBalance = (balance) => {
+    dispatch({
+      type: 'UPDATE_BALANCE',
+      payload: balance,
     });
   };
 
@@ -82,7 +87,7 @@ export const useWalletDispatch = () => {
     dispatch({type : 'LOGOUT'})
   } 
 
-  return { setAccounts, extensionSetup, connectRpc, logout };
+  return { setAccounts, extensionSetup, connectRpc, logout, setBalance};
 };
 
 export const useActions = () => {

@@ -17,7 +17,7 @@ let priceLines = [];
 export const CandleChart = ({
     saveLast,
     order,
-    balanceInfo,
+    balance,
     setIsDisabled
 }) => {
     const elRef = useRef();
@@ -52,6 +52,7 @@ export const CandleChart = ({
                 }));
                 currentBar = data[data.length - 1];
                 console.log(data);
+                saveLast(currentBar);
                 setInitCandles(data);
             });
         }
@@ -109,7 +110,7 @@ export const CandleChart = ({
 
                             ord.amount += order.amount;
                             ord.expected = ord.amount / ord.price;
-                            balanceInfo.balance -= order.amount;
+                            balance -= order.amount;
 
                             if (priceAvg != order.price) {
                                 ord.price = priceAvg;
@@ -148,13 +149,13 @@ export const CandleChart = ({
                     title: order.type,
                 });
 
-                balanceInfo.balance -= order.amount;
+                balance -= order.amount;
                 order.status = 'done';
                 order.line   = newLine;
 
                 // inverted color for stop order
                 color = orderType == 'BUY' ? '#d32f2f' : '#2e7d32';
-                            
+
                 // create stop loss line on chart
                 let newStopLine = candlestickSeriesRef.current.createPriceLine({
                     price: order.sl,
@@ -164,7 +165,7 @@ export const CandleChart = ({
                     axisLabelVisible: true,
                     title: 'SL',
                 });
-                
+
                 type = orderType == 'BUY' ? 'SL BUY' : 'SL SELL';
 
                 // create new order object
@@ -227,7 +228,7 @@ export const CandleChart = ({
                     // buy
                     if (orderType == 'TP BUY') {
                         if (lastCandle.close >= order.price && order.status == 'pending') {
-                            balanceInfo.balance += order.expected;
+                            balance += order.expected;
                             order.status = 'done';
                             orders.forEach((order => candlestickSeriesRef.current.removePriceLine(order.line)));
                             setOrders([]);
@@ -244,7 +245,7 @@ export const CandleChart = ({
                 } else if (orderType == 'SL BUY' || orderType == 'SL SELL') {
                     if (orderType == 'SL BUY') {
                         if (lastCandle.close <= order.price && order.status == 'pending') {
-                            balanceInfo.balance += order.expected;
+                            balance += order.expected;
                             order.status = 'done';
                             orders.forEach((order => candlestickSeriesRef.current.removePriceLine(order.line)));
                             setOrders([]);
@@ -252,7 +253,7 @@ export const CandleChart = ({
                         }
                     } else {  // sell
                         if (lastCandle.close >=  order.price && order.status == 'pending') {
-                            balanceInfo.balance += order.expected;
+                            balance += order.expected;
                             order.status = 'done';
                             orders.forEach((order => candlestickSeriesRef.current.removePriceLine(order.line)));
                             setOrders([]);
