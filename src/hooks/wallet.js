@@ -1,22 +1,25 @@
-import { ApiPromise, Keyring, WsProvider } from "@polkadot/api";
+import { ApiPromise, Keyring, WsProvider } from '@polkadot/api';
 import {
   web3Accounts,
   web3Enable,
   web3FromAddress,
-} from "@polkadot/extension-dapp";
-import React from "react";
-import { BN } from "bn.js";
-import { config } from '../config'
-import { WalletDispatchContext, WalletStateContext } from "../Context/CreateContext/CreateContext";
-import { useNavigate } from "react-router";
+} from '@polkadot/extension-dapp';
+import React from 'react';
+import { BN } from 'bn.js';
+import { config } from '../config';
+import {
+  WalletDispatchContext,
+  WalletStateContext,
+} from '../Context/CreateContext/CreateContext';
+import { useNavigate } from 'react-router';
 
-const keyring = new Keyring({ type: "sr25519" });
+const keyring = new Keyring({ type: 'sr25519' });
 
 export const useWalletState = () => {
   const state = React.useContext(WalletStateContext);
 
   if (state === undefined) {
-    throw new Error("WalletStateContext cannot be used out of context");
+    throw new Error('WalletStateContext cannot be used out of context');
   }
   return state;
 };
@@ -26,7 +29,7 @@ export const useWalletDispatch = () => {
   const state = React.useContext(WalletStateContext);
 
   if (dispatch === undefined) {
-    throw new Error("WalletStateContext cannot be used out of context");
+    throw new Error('WalletStateContext cannot be used out of context');
   }
 
   const setAccounts = (payload) => {
@@ -36,15 +39,15 @@ export const useWalletDispatch = () => {
     });
   };
 
-  const setBalance = ({totalBalance}) => {
+  const setBalance = ({ totalBalance }) => {
     dispatch({
-      type: "SET_BALANCE",
+      type: 'SET_BALANCE',
       payload: { totalBalance },
     });
   };
 
   const extensionSetup = async () => {
-    const extensions = await web3Enable("all-in-network");
+    const extensions = await web3Enable('all-in-network');
     if (extensions.length === 0) {
       return;
     }
@@ -53,7 +56,7 @@ export const useWalletDispatch = () => {
   };
 
   const setApi = (api) => {
-    dispatch({ type: "SET_API", payload: { api } });
+    dispatch({ type: 'SET_API', payload: { api } });
   };
 
   const connectRpc = async () => {
@@ -68,32 +71,32 @@ export const useWalletDispatch = () => {
       const isSoulbound = allSoulbound.find(
         ([value, exposure]) =>
           //@ts-ignore
-          exposure.toJSON().owner.accountId === state?.accounts?.[0].address
+          exposure.toJSON().owner.accountId === state?.accounts?.[0].address,
       );
 
       //@ts-ignore
       const { metadata } = isSoulbound?.[1].toHuman() ?? {};
 
       dispatch({
-        type: "SET_SOULDBOUND",
+        type: 'SET_SOULDBOUND',
         payload: { metadata },
       });
     } catch (error) {
-      console.warn("connectRpc error:", error);
+      console.warn('connectRpc error:', error);
     }
   };
 
   const logout = () => {
-    dispatch({type : 'LOGOUT'})
-  } 
+    dispatch({ type: 'LOGOUT' });
+  };
 
-  return { setAccounts, extensionSetup, connectRpc, logout, setBalance};
+  return { setAccounts, extensionSetup, connectRpc, logout, setBalance };
 };
 
 export const useActions = () => {
   const { api, accounts } = useWalletState();
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const purchaseSoulbound = async ({ nick }) => {
     try {
@@ -111,38 +114,38 @@ export const useActions = () => {
           (result) => {
             if (result.status.isInBlock) {
               console.log(
-                `Transaction included at blockHash ${result.status.asInBlock}`
+                `Transaction included at blockHash ${result.status.asInBlock}`,
               );
             } else if (result.status.isFinalized) {
               console.log(
-                `Transaction finalized at blockHash ${result.status.asFinalized}`
+                `Transaction finalized at blockHash ${result.status.asFinalized}`,
               );
-              alert("Transaction success");
+              alert('Transaction success');
               unsub?.();
-              navigate('/connect')
+              navigate('/connect');
             }
-          }
+          },
         );
     } catch (error) {
-      console.warn("purchaseSoulbound error:", error);
+      console.warn('purchaseSoulbound error:', error);
     }
   };
 
   const faucet = async () => {
     try {
-      const Bob = keyring.addFromUri("//Bob", { name: "Bob default" });
+      const Bob = keyring.addFromUri('//Bob', { name: 'Bob default' });
       const txHash = await api?.tx.balances
         .transfer(accounts?.[0].address, 2000000000000000)
         .signAndSend(Bob, (result) => {
           if (result.status.isInBlock) {
             console.log(
-              `Transaction included at blockHash ${result.status.asInBlock}`
+              `Transaction included at blockHash ${result.status.asInBlock}`,
             );
           } else if (result.status.isFinalized) {
             console.log(
-              `Transaction finalized at blockHash ${result.status.asFinalized}`
+              `Transaction finalized at blockHash ${result.status.asFinalized}`,
             );
-            alert("Transaction success");
+            alert('Transaction success');
             txHash?.();
           }
         });
@@ -150,28 +153,28 @@ export const useActions = () => {
       // Show the hash
       console.log(`Submitted with hash ${txHash}`);
     } catch (error) {
-      console.log("error faucet:", error);
+      console.log('error faucet:', error);
     }
   };
 
   const createFundingAccount = async () => {
     setTimeout(async () => {
-      const alice = keyring.addFromUri("//Alice", { name: "alice" });
+      const alice = keyring.addFromUri('//Alice', { name: 'alice' });
       const managerIsSet = await api?.query.funding.manager();
-      let proxy = "";
+      let proxy = '';
       const newAcc = accounts?.[0].address;
       //const newAcc = bob.address;
       if (managerIsSet?.toHuman() === alice.address) {
         api?.tx.funding
-          .createNewFundingAccount("Any", null, null)
+          .createNewFundingAccount('Any', null, null)
           .signAndSend(alice, ({ events = [], status, txHash }) => {
             if (status.isFinalized) {
               console.log(
-                `--New Account created Transaction hash ${txHash.toHex()}`
+                `--New Account created Transaction hash ${txHash.toHex()}`,
               );
               // Loop through Vec<EventRecord> to display all events
               events.forEach(({ phase, event: { data, method, section } }) => {
-                if (method.toString() === "AnonymousCreated") {
+                if (method.toString() === 'AnonymousCreated') {
                   console.log(`${phase}: ${section}.${method}:: ${data}`);
                   proxy = data.toJSON()[0];
                 }
@@ -185,33 +188,33 @@ export const useActions = () => {
             .signAndSend(alice, ({ events = [], status, txHash }) => {
               if (status.isFinalized) {
                 console.log(
-                  `--Trador register transaction hash ${txHash.toHex()}`
+                  `--Trador register transaction hash ${txHash.toHex()}`,
                 );
                 // Loop through Vec<EventRecord> to display all events
                 events.forEach(
                   ({ phase, event: { data, method, section } }) => {
                     console.log(`${phase}: ${section}.${method}:: ${data}`);
-                  }
+                  },
                 );
               }
             });
         }, 20000);
 
         setTimeout(async () => {
-          console.log("proxy ACC: " + proxy);
-          const balance = new BN("1000000000000000");
+          console.log('proxy ACC: ' + proxy);
+          const balance = new BN('1000000000000000');
           api?.tx.balances
             .transfer(proxy, balance)
             .signAndSend(alice, ({ events = [], status, txHash }) => {
               if (status.isFinalized) {
                 console.log(
-                  `--adding balance to new proxy created Transaction hash ${txHash.toHex()}`
+                  `--adding balance to new proxy created Transaction hash ${txHash.toHex()}`,
                 );
                 // Loop through Vec<EventRecord> to display all events
                 events.forEach(
                   ({ phase, event: { data, method, section } }) => {
                     console.log(`${phase}: ${section}.${method}:: ${data}`);
-                  }
+                  },
                 );
               }
             });
@@ -220,8 +223,8 @@ export const useActions = () => {
         setTimeout(async () => {
           const initialiceExtrinsic = api?.tx.funding.initializeTradorAccount(
             newAcc,
-            "NonTransfer",
-            null
+            'NonTransfer',
+            null,
           );
 
           setTimeout(async () => {
@@ -230,16 +233,16 @@ export const useActions = () => {
             await tx_p?.send(({ events = [], status, txHash }) => {
               if (status.isFinalized) {
                 console.log(
-                  `--proxy initialized Transaction hash ${txHash.toHex()}`
+                  `--proxy initialized Transaction hash ${txHash.toHex()}`,
                 );
 
                 // Loop through Vec<EventRecord> to display all events
                 events.forEach(
                   ({ phase, event: { data, method, section } }) => {
                     console.log(`${phase}: ${section}.${method}:: ${data}`);
-                  }
+                  },
                 );
-                alert("Your account has been created");
+                alert('Your account has been created');
                 //process.exit(0);
               }
             });
@@ -251,4 +254,3 @@ export const useActions = () => {
 
   return { purchaseSoulbound, faucet, createFundingAccount };
 };
-

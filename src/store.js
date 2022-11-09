@@ -1,9 +1,8 @@
-import { applyMiddleware,createStore } from "redux";
-import thunk from "redux-thunk";
-import Reducer from './Redux/Reducers/Index'
+import { applyMiddleware, createStore } from 'redux';
+import thunk from 'redux-thunk';
+import Reducer from './Redux/Reducers/Index';
 
-
-const store=createStore(Reducer,applyMiddleware(thunk));
+const store = createStore(Reducer, applyMiddleware(thunk));
 
 export default store;
 
@@ -30,11 +29,10 @@ export default store;
 //         // span.appendChild(txt);
 //         li.appendChild(spansecond);
 //         li.appendChild(span);
-       
-        
+
 //     }
 
-//delete code 
+//delete code
 
 // import React, { useState } from "react";
 
@@ -140,5 +138,3 @@ export default store;
 // }
 
 // export default ToDoListExample;
-
-

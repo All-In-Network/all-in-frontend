@@ -1,10 +1,10 @@
-import { useCallback, useEffect, useState } from "react";
-import { useWalletState } from "./wallet";
+import { useCallback, useEffect, useState } from 'react';
+import { useWalletState } from './wallet';
 
 export const useGetNickName = () => {
   const { api, accounts } = useWalletState();
 
-  const [nickName, setNickName] = useState("");
+  const [nickName, setNickName] = useState('');
 
   const getNickName = useCallback(async () => {
     try {
@@ -19,7 +19,7 @@ export const useGetNickName = () => {
 
   useEffect(() => {
     getNickName();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return { nickName };

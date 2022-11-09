@@ -1,6 +1,6 @@
-import { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-import { useWalletState } from "./wallet";
+import { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useWalletState } from './wallet';
 
 export const useIsConnected = () => {
   const { isConnected } = useWalletState();
@@ -9,7 +9,7 @@ export const useIsConnected = () => {
 
   useEffect(() => {
     if (!isConnected) {
-      navigate("/connect");
+      navigate('/connect');
     }
   }, [isConnected, navigate]);
 };

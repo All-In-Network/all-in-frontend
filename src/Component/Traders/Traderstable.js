@@ -1,10 +1,8 @@
-import React from "react";
-import DataTable from "react-data-table-component";
-import { TradersListData } from "./TradersData";
-
+import React from 'react';
+import DataTable from 'react-data-table-component';
+import { TradersListData } from './TradersData';
 
 function TradersTable() {
-
   return (
     <div className="card mb-3">
       <DataTable
@@ -13,9 +11,8 @@ function TradersTable() {
         data={TradersListData.rows}
         defaultSortField="title"
         pagination
-
         subHeaderComponent={() => {
-          return <input type="text" />
+          return <input type="text" />;
         }}
         selectableRows={false}
         className="table myDataTable table-hover align-middle mb-0 d-row nowrap dataTable no-footer dtr-inline"
@@ -24,6 +21,5 @@ function TradersTable() {
     </div>
   );
 }
-
 
 export default TradersTable;
