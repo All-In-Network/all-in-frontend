@@ -111,7 +111,6 @@ export const CandleChart = ({
                             priceAvg  = Math.ceil(((ord.price * 1) + (order.price * 1)) / 2);
 
                             ord.amount += order.amount;
-                            ord.expected = ord.amount / ord.price;
                             balance -= order.amount;
 
                             if (priceAvg !== order.price) {
@@ -132,8 +131,16 @@ export const CandleChart = ({
                             }
                         }
                     } else {
-                        ord.amount += order.expected;
-                        ord.expected = ord.amount * ord.price;
+                        ord.amount  += order.amount;
+                        ord.parentPrice = orders[0].price;
+
+                        if (ord.type == 'TP BUY' || ord.type == 'SL SELL') {
+                            ord.expected = (ord.price - ord.parentPrice) * ord.amount;
+                            
+                        }
+                        else if (ord.type == 'TP SELL' || ord.type == 'SL BUY') {
+                            ord.expected = (ord.parentPrice - ord.price) * ord.amount;
+                        }
                     }
                 }));
             }
@@ -180,6 +187,7 @@ export const CandleChart = ({
                     'sl'    : null,
                     'tp'    : null,
                     'expected': (order.price - order.sl),
+                    'parentPrice': order.price,
                 }
 
                 let newTPLine = candlestickSeriesRef.current.createPriceLine({
@@ -198,11 +206,12 @@ export const CandleChart = ({
                     'type'  : type,
                     'status': 'pending',
                     'line'  : newTPLine,
-                    'amount': order.expected,
+                    'amount': order.amount,
                     'pair'  : order.pair,
                     'sl'    : null,
                     'tp'    : null,
-                    'expected': (order.price - order.sl) * 1,
+                    'expected': (order.price - order.tp) * 1,
+                    'parentPrice': order.price,
                 }
 
                 setOrders([...orders, order, newStopOrder, newTPOrder]);
