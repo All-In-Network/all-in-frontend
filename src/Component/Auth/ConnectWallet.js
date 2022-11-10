@@ -17,6 +17,7 @@ function ConnectWallet() {
   }, [accounts, isConnected])
 
   React.useEffect(() => {
+    console.log(soulbound)
     if (!isConnected) return
     const timer = setTimeout(() => {
       if (soulbound.isSoulbound) {

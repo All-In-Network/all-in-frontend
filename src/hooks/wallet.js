@@ -69,9 +69,8 @@ export const useWalletDispatch = () => {
       const allSoulbound = await api?.query.rmrkCore.nfts.entries()
 
       const isSoulbound = allSoulbound.find(
-        /* value */
-        ([exposure]) =>
-          exposure.toJSON().owner.accountId === state?.accounts?.[0].address
+        ([, exposure]) =>
+          exposure.toJSON().owner?.accountId === state?.accounts?.[0].address
       )
 
       // @ts-ignore

@@ -238,7 +238,7 @@ export function CandleChart({
             }
           } else if (orderType === 'TP SELL') {
             if (lastCandle.close <= or.price && or.status === 'pending') {
-              balance -= 1 * or.expected
+              balance += 1 * or.expected
               or.status = 'done'
               orders.forEach(item =>
                 candlestickSeriesRef.current.removePriceLine(item.line)

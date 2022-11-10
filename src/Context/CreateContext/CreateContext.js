@@ -20,11 +20,8 @@ function walletReducer(state, action) {
     case 'SET_API':
       return { ...state, api: payload.api }
     case 'SET_SOULDBOUND':
-      // eslint-disable-next-line no-case-declarations
-      let isSoulbound = false
-      if (payload.metadata) {
-        isSoulbound = true
-      }
+      const isSoulbound = !!payload.metadata
+      console.log({ isSoulbound })
       return {
         ...state,
         soulbound: { isSoulbound, metadata: payload.metadata },
