@@ -21,7 +21,8 @@ function MainIndex(props) {
         ''
       ) : (
         <Header
-          onModalOpen={val => {
+          onModalOpen={() => {
+            // eslint-disable-next-line react/destructuring-assignment
             props.onModalOpen(true)
           }}
           GotoChangeMenu={val => {

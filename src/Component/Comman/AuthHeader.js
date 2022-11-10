@@ -1,7 +1,8 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
 import React from 'react'
 import { Link } from 'react-router-dom'
 
-function AuthHeader(props) {
+function AuthHeader() {
   return (
     <div className="container-xxl">
       <div className="row align-items-center">

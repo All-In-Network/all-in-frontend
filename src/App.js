@@ -1,3 +1,4 @@
+/* eslint-disable no-shadow */
 import React, { useState } from 'react'
 import { connect } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
@@ -5,9 +6,8 @@ import Sidebar from './Component/Comman/Sidebar'
 import MainIndex from './Screen/MainIndex'
 import AuthIndex from './Screen/AuthIndex'
 import menu from './Component/Data/Menu/Menu.json'
-import menu2 from './Component/Data/Menu/Menu2.json'
 
-function App(props) {
+function App() {
   const [menuData, setMenuData] = useState([...menu.menu])
   const navigate = useNavigate()
   const baseUrl = process.env.PUBLIC_URL
@@ -32,7 +32,7 @@ function App(props) {
       </div>
     )
   }
-  const GotoChangeMenu = val => {
+  const GotoChangeMenu = () => {
     navigate(`${baseUrl}/`)
     setMenuData([...menu.menu])
   }

@@ -1,3 +1,5 @@
+/* eslint-disable guard-for-in */
+/* eslint-disable no-restricted-syntax */
 import React, { useEffect, useRef, useState } from 'react'
 import { createChart } from 'lightweight-charts'
 import { useWalletDispatch } from '../../hooks/wallet'
@@ -93,7 +95,6 @@ export function CandleChart({
         return
       }
 
-      const curOrder = null
       let orderType = ''
       let priceAvg = 0
       orderType = order.type
@@ -128,9 +129,9 @@ export function CandleChart({
             ord.amount += order.amount
             ord.parentPrice = orders[0].price
 
-            if (ord.type == 'TP BUY' || ord.type == 'SL SELL') {
+            if (ord.type === 'TP BUY' || ord.type === 'SL SELL') {
               ord.expected = (ord.price - ord.parentPrice) * ord.amount
-            } else if (ord.type == 'TP SELL' || ord.type == 'SL BUY') {
+            } else if (ord.type === 'TP SELL' || ord.type === 'SL BUY') {
               ord.expected = (ord.parentPrice - ord.price) * ord.amount
             }
           }
@@ -218,29 +219,29 @@ export function CandleChart({
         return
       }
 
-      orders.forEach(order => {
+      orders.forEach(or => {
         let orderType = ''
-        orderType = order.type
+        orderType = or.type
 
         if (orderType === 'TP BUY' || orderType === 'TP SELL') {
           // buy
           if (orderType === 'TP BUY') {
-            if (lastCandle.close >= order.price && order.status === 'pending') {
-              balance += order.expected
-              order.status = 'done'
-              orders.forEach(order =>
-                candlestickSeriesRef.current.removePriceLine(order.line)
+            if (lastCandle.close >= or.price && or.status === 'pending') {
+              balance += or.expected
+              or.status = 'done'
+              orders.forEach(item =>
+                candlestickSeriesRef.current.removePriceLine(item.line)
               )
               setBalance({ totalBalance: balance })
               setOrders([])
               handleOpenModal('win')
             }
           } else if (orderType === 'TP SELL') {
-            if (lastCandle.close <= order.price && order.status === 'pending') {
-              balance -= 1 * order.expected
-              order.status = 'done'
-              orders.forEach(order =>
-                candlestickSeriesRef.current.removePriceLine(order.line)
+            if (lastCandle.close <= or.price && or.status === 'pending') {
+              balance -= 1 * or.expected
+              or.status = 'done'
+              orders.forEach(item =>
+                candlestickSeriesRef.current.removePriceLine(item.line)
               )
               setBalance({ totalBalance: balance })
               setOrders([])
@@ -249,28 +250,24 @@ export function CandleChart({
           }
         } else if (orderType === 'SL BUY' || orderType === 'SL SELL') {
           if (orderType === 'SL BUY') {
-            if (lastCandle.close <= order.price && order.status === 'pending') {
-              balance -= 1 * order.expected
-              order.status = 'done'
-              orders.forEach(order =>
-                candlestickSeriesRef.current.removePriceLine(order.line)
+            if (lastCandle.close <= or.price && or.status === 'pending') {
+              balance -= 1 * or.expected
+              or.status = 'done'
+              orders.forEach(item =>
+                candlestickSeriesRef.current.removePriceLine(item.line)
               )
               setBalance({ totalBalance: balance })
               setOrders([])
               // handleOpenModal('')
             }
-          } else {
-            // sell
-            if (lastCandle.close >= order.price && order.status === 'pending') {
-              balance -= -1 * order.expected
-              order.status = 'done'
-              orders.forEach(order =>
-                candlestickSeriesRef.current.removePriceLine(order.line)
-              )
-              setBalance({ totalBalance: balance })
-              setOrders([])
-              // handleOpenModal('')
-            }
+          } else if (lastCandle.close >= or.price && or.status === 'pending') {
+            balance -= -1 * or.expected
+            or.status = 'done'
+            orders.forEach(item =>
+              candlestickSeriesRef.current.removePriceLine(item.line)
+            )
+            setBalance({ totalBalance: balance })
+            setOrders([])
           }
         }
       })

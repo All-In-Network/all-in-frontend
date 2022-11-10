@@ -114,7 +114,7 @@ function TraderModal() {
     <Modal size="lg" aria-labelledby="contained-modal-title-vcenter" centered>
       <Modal.Header closeButton>
         <Modal.Title id="contained-modal-title-vcenter">
-          DeGen's trader profile
+          {`DeGen's trader profile`}
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>

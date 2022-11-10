@@ -4,6 +4,7 @@ const initialState = {
   highcontrast: '',
   rtlmode: false,
 }
+// eslint-disable-next-line default-param-last
 const Mainreducer = (state = initialState, action) => {
   switch (action.type) {
     case 'MODAL_OPEN': {

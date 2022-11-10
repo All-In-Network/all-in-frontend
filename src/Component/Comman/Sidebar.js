@@ -1,3 +1,4 @@
+/* eslint-disable react/no-array-index-key */
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 
@@ -8,7 +9,7 @@ function Sidebar(props) {
   const openChildren = id => {
     const otherTabs = document.getElementsByClassName('has-children')
     if (otherTabs) {
-      for (let i = 0; i < otherTabs.length; i++) {
+      for (let i = 0; i < otherTabs.length; i + 1) {
         if (otherTabs[i].id !== id) {
           otherTabs[i].className = otherTabs[i].className.replace(' show', '')
           if (otherTabs[i].parentElement.children.length > 1) {
@@ -44,7 +45,7 @@ function Sidebar(props) {
   const openChildren1 = id => {
     const otherTabs = document.getElementsByClassName('has-children')
     if (otherTabs) {
-      for (let i = 0; i < otherTabs.length; i++) {
+      for (let i = 0; i < otherTabs.length; i + 1) {
         otherTabs[i].className = otherTabs[i].className.replace(' show', '')
       }
     }
@@ -157,7 +158,7 @@ function Sidebar(props) {
                   to="#!"
                   className={`m-link ${
                     d.children.filter(
-                      d => `${baseUrl}/${d.routerLink[0]}` === activekey
+                      x => `${baseUrl}/${x.routerLink[0]}` === activekey
                     ).length > 0
                       ? 'active'
                       : ''

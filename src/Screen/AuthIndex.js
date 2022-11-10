@@ -11,7 +11,8 @@ function AuthIndex(props) {
   return (
     <div className="main p-2 py-3 p-xl-5">
       <AuthHeader
-        onModalOpen={val => {
+        onModalOpen={() => {
+          // eslint-disable-next-line react/destructuring-assignment
           props.onModalOpen(true)
         }}
       />

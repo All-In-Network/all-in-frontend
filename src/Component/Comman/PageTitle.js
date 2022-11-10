@@ -1,4 +1,5 @@
-import { Modal, Tab, Nav } from 'react-bootstrap'
+/* eslint-disable jsx-a11y/label-has-associated-control */
+import { Modal, Nav } from 'react-bootstrap'
 import React, { useState } from 'react'
 
 function PageTitle(props) {
@@ -197,6 +198,7 @@ function PageTitle(props) {
             type="button"
             className="btn btn-secondary"
             onClick={() => {
+              // eslint-disable-next-line react/no-this-in-sfc
               this.setState({ ismodal: false })
             }}
             data-bs-dismiss="modal"

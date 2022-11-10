@@ -1,9 +1,8 @@
+/* eslint-disable import/extensions */
 import React, { useRef } from 'react'
 import Col from 'react-bootstrap/Col'
 import Container from 'react-bootstrap/Container'
-import Modal from 'react-bootstrap/Modal'
 import Row from 'react-bootstrap/Row'
-import { Button } from 'react-bootstrap'
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -71,38 +70,6 @@ function MyBar() {
   return <Line ref={chartRef} data={chart} />
 }
 
-function TraderModal() {
-  return (
-    <Modal size="lg" aria-labelledby="contained-modal-title-vcenter" centered>
-      <Modal.Header closeButton>
-        <Modal.Title id="contained-modal-title-vcenter">
-          DeGen's trader profile
-        </Modal.Title>
-      </Modal.Header>
-      <Modal.Body>
-        <MyBar />
-        <Container>
-          {data.map(item => {
-            return (
-              <Row>
-                <Col xs={12} md={8}>
-                  {item.title}
-                </Col>
-                <Col xs={6} md={4}>
-                  {item.value}
-                </Col>
-              </Row>
-            )
-          })}
-        </Container>
-      </Modal.Body>
-      <Modal.Footer>
-        <Button>Close</Button>
-      </Modal.Footer>
-    </Modal>
-  )
-}
-
 export const TradersListData = {
   title: 'Leaders List',
   columns: [
@@ -140,7 +107,7 @@ export const TradersListData = {
     },
     {
       name: '',
-      selector: row => {},
+      selector: () => {},
       sortable: true,
       cell: () => (
         <div>
@@ -157,7 +124,7 @@ export const TradersListData = {
               <div className="modal-dialog">
                 <div className="modal-content">
                   <div className="modal-header">
-                    <h5 className="modal-title">DeGen's trader profile</h5>
+                    <h5 className="modal-title">{`DeGen's trader profile`}</h5>
                     <button
                       type="button"
                       className="btn-close"

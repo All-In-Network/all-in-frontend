@@ -9,8 +9,6 @@ export const useGetNickName = () => {
   const getNickName = useCallback(async () => {
     try {
       const res = await api?.query.nicks.nameOf(accounts?.[0]?.address)
-
-      /* @ts-ignore */
       setNickName(res?.toHuman()?.[0])
     } catch (error) {
       console.log(error)
@@ -19,7 +17,6 @@ export const useGetNickName = () => {
 
   useEffect(() => {
     getNickName()
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   return { nickName }

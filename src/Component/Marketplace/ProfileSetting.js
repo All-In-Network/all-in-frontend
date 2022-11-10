@@ -1,7 +1,7 @@
+/* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { useCallback, useState } from 'react'
 import Button from 'react-bootstrap/Button'
 import Spinner from 'react-bootstrap/Spinner'
-import { useNavigate } from 'react-router'
 import { useActions } from '../../hooks/wallet'
 
 function ProfileSetting() {

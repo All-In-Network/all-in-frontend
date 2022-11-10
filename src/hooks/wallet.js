@@ -69,8 +69,8 @@ export const useWalletDispatch = () => {
       const allSoulbound = await api?.query.rmrkCore.nfts.entries()
 
       const isSoulbound = allSoulbound.find(
-        ([value, exposure]) =>
-          // @ts-ignore
+        /* value */
+        ([exposure]) =>
           exposure.toJSON().owner.accountId === state?.accounts?.[0].address
       )
 
@@ -176,6 +176,7 @@ export const useActions = () => {
               events.forEach(({ phase, event: { data, method, section } }) => {
                 if (method.toString() === 'AnonymousCreated') {
                   console.log(`${phase}: ${section}.${method}:: ${data}`)
+                  // eslint-disable-next-line prefer-destructuring
                   proxy = data.toJSON()[0]
                 }
               })
@@ -228,9 +229,9 @@ export const useActions = () => {
           )
 
           setTimeout(async () => {
-            const tx_p = api?.tx.proxy.proxy(proxy, null, initialiceExtrinsic)
-            await tx_p?.signAsync(alice, { nonce: -1 })
-            await tx_p?.send(({ events = [], status, txHash }) => {
+            const tx = api?.tx.proxy.proxy(proxy, null, initialiceExtrinsic)
+            await tx?.signAsync(alice, { nonce: -1 })
+            await tx?.send(({ events = [], status, txHash }) => {
               if (status.isFinalized) {
                 console.log(
                   `--proxy initialized Transaction hash ${txHash.toHex()}`

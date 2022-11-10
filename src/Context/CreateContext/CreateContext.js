@@ -8,22 +8,6 @@ export const INITIAL_STATE = {
   totalBalance: 10000,
 }
 
-export const WalletStateContext = React.createContext(undefined)
-
-export const WalletDispatchContext = React.createContext(undefined)
-
-export function WalletProvider({ children }) {
-  const [state, dispatch] = React.useReducer(walletReducer, INITIAL_STATE)
-
-  return (
-    <WalletStateContext.Provider value={state}>
-      <WalletDispatchContext.Provider value={dispatch}>
-        {children}
-      </WalletDispatchContext.Provider>
-    </WalletStateContext.Provider>
-  )
-}
-
 function walletReducer(state, action) {
   const { type, payload } = action
   switch (type) {
@@ -36,6 +20,7 @@ function walletReducer(state, action) {
     case 'SET_API':
       return { ...state, api: payload.api }
     case 'SET_SOULDBOUND':
+      // eslint-disable-next-line no-case-declarations
       let isSoulbound = false
       if (payload.metadata) {
         isSoulbound = true
@@ -51,4 +36,20 @@ function walletReducer(state, action) {
     default:
       return { ...state }
   }
+}
+
+export const WalletStateContext = React.createContext(undefined)
+
+export const WalletDispatchContext = React.createContext(undefined)
+
+export function WalletProvider({ children }) {
+  const [state, dispatch] = React.useReducer(walletReducer, INITIAL_STATE)
+
+  return (
+    <WalletStateContext.Provider value={state}>
+      <WalletDispatchContext.Provider value={dispatch}>
+        {children}
+      </WalletDispatchContext.Provider>
+    </WalletStateContext.Provider>
+  )
 }

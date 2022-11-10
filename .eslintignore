@@ -4,3 +4,4 @@ node_modules
 docker-compose.prod.yml
 Dockerfile
 src/assets
+*.test.js

@@ -1,10 +1,9 @@
 import React from 'react'
 import { Button, Dropdown } from 'react-bootstrap'
-import { Link } from 'react-router-dom'
 import { useGetNickName } from '../../hooks/useGetNickName'
 import { useWalletDispatch, useWalletState } from '../../hooks/wallet'
 
-function Header(props) {
+function Header() {
   const { nickName } = useGetNickName()
 
   const { accounts, soulbound } = useWalletState()

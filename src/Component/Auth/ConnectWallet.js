@@ -14,7 +14,6 @@ function ConnectWallet() {
     if (isConnected && accounts?.[0].address) {
       connectRpc()
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [accounts, isConnected])
 
   React.useEffect(() => {

@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { useCallback, useState } from 'react'
 import { Button, Nav, Spinner, Tab } from 'react-bootstrap'
 import Modal from 'react-bootstrap/Modal'
@@ -10,8 +11,6 @@ import {
   useWalletState,
 } from '../../hooks/wallet'
 
-const isWin = { win: 'win', lost: 'lost' }
-
 function Market() {
   useIsConnected()
 
@@ -21,8 +20,8 @@ function Market() {
 
   const [open, setOpen] = useState(false)
 
-  const handleOpen = target => {
-    setTarget(target)
+  const handleOpen = tar => {
+    setTarget(tar)
     setOpen(true)
   }
 
@@ -61,12 +60,12 @@ function Market() {
     let tp = 0
 
     if (SLInput) {
-      setSLInput(parseInt(SLInput))
+      setSLInput(parseInt(SLInput, 10))
       sl = SLInput
     } else sl = type === 'BUY' ? curPrice - def : curPrice + def
 
     if (TPInput) {
-      setTPInput(parseInt(TPInput))
+      setTPInput(parseInt(TPInput, 10))
       tp = TPInput
     } else tp = type === 'BUY' ? curPrice + def : curPrice - def
 
@@ -76,8 +75,8 @@ function Market() {
       type,
       status: 'pending',
       pair: 'BTC/USD',
-      sl: parseInt(sl),
-      tp: parseInt(tp),
+      sl: parseInt(sl, 10),
+      tp: parseInt(tp, 10),
       expected,
     })
   }
