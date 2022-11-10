@@ -1,56 +1,63 @@
-import React, { useState } from 'react';
-import { connect } from 'react-redux';
-import Sidebar from './Component/Comman/Sidebar';
-import MainIndex from './Screen/MainIndex';
-import {  useNavigate } from 'react-router-dom';
-import AuthIndex from './Screen/AuthIndex';
-import menu from '../src/Component/Data/Menu/Menu.json';
-import menu2 from '../src/Component/Data/Menu/Menu2.json';
+import React, { useState } from 'react'
+import { connect } from 'react-redux'
+import Sidebar from './Component/Comman/Sidebar'
+import MainIndex from './Screen/MainIndex'
+import { useNavigate } from 'react-router-dom'
+import AuthIndex from './Screen/AuthIndex'
+import menu from '../src/Component/Data/Menu/Menu.json'
+import menu2 from '../src/Component/Data/Menu/Menu2.json'
 
 function App(props) {
-  const [menuData, setMenuData] = useState([...menu.menu]);
-  const navigate = useNavigate();
+  const [menuData, setMenuData] = useState([...menu.menu])
+  const navigate = useNavigate()
   var baseUrl = process.env.PUBLIC_URL
   const activekey = () => {
     var res = window.location.pathname
     var baseUrl = process.env.PUBLIC_URL
-    baseUrl = baseUrl.split("/");
-    res = res.split("/");
-    res = res.length > 0 ? res[baseUrl.length] : "/";
-    res = res ? "/" + res : "/";;
-    const activeKey1 = res;
+    baseUrl = baseUrl.split('/')
+    res = res.split('/')
+    res = res.length > 0 ? res[baseUrl.length] : '/'
+    res = res ? '/' + res : '/'
+    const activeKey1 = res
     return activeKey1
   }
-  if (activekey() === '/connect' || activekey() === '/register' || activekey() === '/404page') {
+  if (
+    activekey() === '/connect' ||
+    activekey() === '/register' ||
+    activekey() === '/404page'
+  ) {
     return (
-      <div id="cryptoon-layout" className='theme-indigo'>
+      <div id="cryptoon-layout" className="theme-indigo">
         <AuthIndex />
       </div>
-    );
+    )
   }
-  const GotoChangeMenu = (val) => {
+  const GotoChangeMenu = val => {
     navigate(baseUrl + '/')
-      setMenuData([...menu.menu]);
+    setMenuData([...menu.menu])
   }
 
   // console.log(activekey())
   return (
-    <div id='cryptoon-layout' className='theme-indigo'>
+    <div id="cryptoon-layout" className="theme-indigo">
       <Sidebar
         activekey={activekey()}
         menuData={menuData}
-        GotoChangeMenu={(val) => { GotoChangeMenu(val) }}
+        GotoChangeMenu={val => {
+          GotoChangeMenu(val)
+        }}
       />
-      <MainIndex activekey={activekey()}
-        GotoChangeMenu={(val) => { GotoChangeMenu(val) }}
+      <MainIndex
+        activekey={activekey()}
+        GotoChangeMenu={val => {
+          GotoChangeMenu(val)
+        }}
       />
     </div>
-  );
+  )
 }
 const mapStateToProps = ({ Mainreducer }) => ({
-  Mainreducer
+  Mainreducer,
 })
 
-export default connect(mapStateToProps, {
-
-})(App);
+export default connect(mapStateToProps, {})(App)

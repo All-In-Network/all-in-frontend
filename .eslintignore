@@ -1,3 +1,5 @@
 node_modules
 .github
 *.jpg
+docker-compose.prod.yml
+Dockerfile
