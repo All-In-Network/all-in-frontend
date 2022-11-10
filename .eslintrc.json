@@ -15,11 +15,10 @@
   },
   "plugins": ["react"],
   "rules": {
-
-    "no-case-declarations":"off",
+    "no-case-declarations": "off",
     "no-param-reassign": 0,
     "consistent-return": "off",
-    "no-underscore-dangle":"off",
+    "no-underscore-dangle": "off",
     "no-empty": 0,
     "react/prop-types": 0,
     "no-unsafe-optional-chaining": "off",
@@ -27,7 +26,11 @@
     "import/prefer-default-export": "off",
     "no-console": "off",
     "no-alert": "off",
-    "react/jsx-filename-extension": [1, {
-    "extensions": [".js", ".jsx"]}
-    ]}
+    "react/jsx-filename-extension": [
+      1,
+      {
+        "extensions": [".js", ".jsx"]
+      }
+    ]
+  }
 }
