@@ -3,3 +3,4 @@ node_modules
 *.jpg
 docker-compose.prod.yml
 Dockerfile
+src/assets
