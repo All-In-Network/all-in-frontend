@@ -16,10 +16,10 @@ function AuthIndex(props) {
         }}
       />
       <Routes>
-        <Route exact path={baseUrl + '/connect'} element={<ConnectWallet />} />
+        <Route exact path={`${baseUrl}/connect`} element={<ConnectWallet />} />
         <Route
           exact
-          path={baseUrl + '/register'}
+          path={`${baseUrl}/register`}
           element={<RegisterSoulbound />}
         />
       </Routes>

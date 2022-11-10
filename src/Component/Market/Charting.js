@@ -9,15 +9,15 @@ const HEIGHT = 690
 
 let currentBar
 let trades = []
-let priceLines = []
+const priceLines = []
 
-export const CandleChart = ({
+export function CandleChart({
   saveLast,
   order,
   balance,
   setIsDisabled,
   handleOpenModal,
-}) => {
+}) {
   const elRef = useRef()
   const chartRef = useRef()
   const candlestickSeriesRef = useRef()
@@ -30,7 +30,7 @@ export const CandleChart = ({
 
   useEffect(() => {
     async function getInitCandles() {
-      var start = new Date(Date.now() - 7200 * 1000).toISOString()
+      const start = new Date(Date.now() - 7200 * 1000).toISOString()
       const BarsUrl = `https://data.alpaca.markets/v1beta2/crypto/bars?symbols=BTC/USD&timeframe=1Min&start=${start}`
 
       fetch(BarsUrl, {
@@ -93,7 +93,7 @@ export const CandleChart = ({
         return
       }
 
-      let curOrder = null
+      const curOrder = null
       let orderType = ''
       let priceAvg = 0
       orderType = order.type
@@ -112,7 +112,7 @@ export const CandleChart = ({
                 // delete old line
                 candlestickSeriesRef.current.removePriceLine(ord.line)
 
-                let nLine = candlestickSeriesRef.current.createPriceLine({
+                const nLine = candlestickSeriesRef.current.createPriceLine({
                   price: ord.price,
                   color: orderType === 'SELL' ? '#d32f2f' : '#2e7d32',
                   lineWidth: 2,
@@ -139,9 +139,9 @@ export const CandleChart = ({
         let color = orderType === 'SELL' ? '#d32f2f' : '#2e7d32'
         let type = ''
 
-        let newLine = candlestickSeriesRef.current.createPriceLine({
+        const newLine = candlestickSeriesRef.current.createPriceLine({
           price: order.price,
-          color: color,
+          color,
           lineWidth: 2,
           lineStyle: 2,
           axisLabelVisible: true,
@@ -155,9 +155,9 @@ export const CandleChart = ({
         color = orderType === 'BUY' ? '#d32f2f' : '#2e7d32'
 
         // create stop loss line on chart
-        let newStopLine = candlestickSeriesRef.current.createPriceLine({
+        const newStopLine = candlestickSeriesRef.current.createPriceLine({
           price: order.sl,
-          color: color,
+          color,
           lineWidth: 2,
           lineStyle: 2,
           axisLabelVisible: true,
@@ -167,9 +167,9 @@ export const CandleChart = ({
         type = orderType === 'BUY' ? 'SL BUY' : 'SL SELL'
 
         // create new order object
-        let newStopOrder = {
+        const newStopOrder = {
           price: order.sl,
-          type: type,
+          type,
           status: 'pending',
           line: newStopLine,
           amount: order.amount,
@@ -180,7 +180,7 @@ export const CandleChart = ({
           parentPrice: order.price,
         }
 
-        let newTPLine = candlestickSeriesRef.current.createPriceLine({
+        const newTPLine = candlestickSeriesRef.current.createPriceLine({
           price: order.tp,
           color: '#2e7d32',
           lineWidth: 2,
@@ -191,9 +191,9 @@ export const CandleChart = ({
 
         type = orderType === 'BUY' ? 'TP BUY' : 'TP SELL'
 
-        let newTPOrder = {
+        const newTPOrder = {
           price: order.tp,
-          type: type,
+          type,
           status: 'pending',
           line: newTPLine,
           amount: order.amount,
@@ -226,7 +226,7 @@ export const CandleChart = ({
           // buy
           if (orderType === 'TP BUY') {
             if (lastCandle.close >= order.price && order.status === 'pending') {
-              balance = balance + order.expected
+              balance += order.expected
               order.status = 'done'
               orders.forEach(order =>
                 candlestickSeriesRef.current.removePriceLine(order.line)
@@ -237,7 +237,7 @@ export const CandleChart = ({
             }
           } else if (orderType === 'TP SELL') {
             if (lastCandle.close <= order.price && order.status === 'pending') {
-              balance = balance - 1 * order.expected
+              balance -= 1 * order.expected
               order.status = 'done'
               orders.forEach(order =>
                 candlestickSeriesRef.current.removePriceLine(order.line)
@@ -250,26 +250,26 @@ export const CandleChart = ({
         } else if (orderType === 'SL BUY' || orderType === 'SL SELL') {
           if (orderType === 'SL BUY') {
             if (lastCandle.close <= order.price && order.status === 'pending') {
-              balance = balance - 1 * order.expected
+              balance -= 1 * order.expected
               order.status = 'done'
               orders.forEach(order =>
                 candlestickSeriesRef.current.removePriceLine(order.line)
               )
               setBalance({ totalBalance: balance })
               setOrders([])
-              //handleOpenModal('')
+              // handleOpenModal('')
             }
           } else {
             // sell
             if (lastCandle.close >= order.price && order.status === 'pending') {
-              balance = balance - -1 * order.expected
+              balance -= -1 * order.expected
               order.status = 'done'
               orders.forEach(order =>
                 candlestickSeriesRef.current.removePriceLine(order.line)
               )
               setBalance({ totalBalance: balance })
               setOrders([])
-              //handleOpenModal('')
+              // handleOpenModal('')
             }
           }
         }
@@ -311,32 +311,32 @@ export const CandleChart = ({
     }
 
     client.onmessage = message => {
-      let data = JSON.parse(message.data)
+      const data = JSON.parse(message.data)
 
-      for (let key in data) {
+      for (const key in data) {
         const type = data[key].T
         if (type === 't') {
           trades.push(data[key].p)
 
-          let open = trades[0]
-          let high = Math.max(...trades)
-          let low = Math.min(...trades)
-          let close = trades[trades.length - 1]
+          const open = trades[0]
+          const high = Math.max(...trades)
+          const low = Math.min(...trades)
+          const close = trades[trades.length - 1]
 
-          let candle = {
+          const candle = {
             time: currentBar.time + 60,
-            open: open,
-            high: high,
-            low: low,
-            close: close,
+            open,
+            high,
+            low,
+            close,
           }
           saveLast(candle)
           setLastCandle(candle)
         }
 
         if (type === 'b') {
-          let bar = data[key]
-          let timestamp = new Date(bar.t).getTime() / 1000
+          const bar = data[key]
+          const timestamp = new Date(bar.t).getTime() / 1000
 
           currentBar = {
             time: timestamp,
@@ -355,5 +355,5 @@ export const CandleChart = ({
     return () => client.close()
   }, [])
 
-  return <div ref={elRef}></div>
+  return <div ref={elRef} />
 }

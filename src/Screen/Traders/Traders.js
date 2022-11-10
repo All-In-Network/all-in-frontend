@@ -1,13 +1,9 @@
 import React, { useRef } from 'react'
-import PageTitle from '../../Component/Comman/PageTitle'
 import Col from 'react-bootstrap/Col'
 import Container from 'react-bootstrap/Container'
 import Modal from 'react-bootstrap/Modal'
 import Row from 'react-bootstrap/Row'
 import { Button } from 'react-bootstrap'
-import { TradersListData } from '../../Component/Traders/TradersData'
-
-import { useIsConnected } from '../../hooks/useIsConnected'
 
 import {
   Chart as ChartJS,
@@ -21,6 +17,9 @@ import {
 } from 'chart.js'
 import { Line } from 'react-chartjs-2'
 import DataTable from 'react-data-table-component'
+import { useIsConnected } from '../../hooks/useIsConnected'
+import { TradersListData } from '../../Component/Traders/TradersData'
+import PageTitle from '../../Component/Comman/PageTitle'
 
 function Traders() {
   useIsConnected()
@@ -28,7 +27,7 @@ function Traders() {
   return (
     <>
       <div className="body-header border-bottom d-flex py-3 mb-3">
-        <PageTitle pagetitle="Traders List" sidebutton={true} />
+        <PageTitle pagetitle="Traders List" sidebutton />
       </div>
       <div className="container-xxl">
         <div className="row align-item-center">
@@ -45,7 +44,7 @@ function Traders() {
                 }}
                 selectableRows={false}
                 className="table myDataTable table-hover align-middle mb-0 d-row nowrap dataTable no-footer dtr-inline"
-                highlightOnHover={true}
+                highlightOnHover
               />
             </div>
           </div>
@@ -104,13 +103,13 @@ export const chart = {
   ],
 }
 
-const MyBar = () => {
+function MyBar() {
   const chartRef = useRef(null)
 
   return <Line ref={chartRef} data={chart} />
 }
 
-const TraderModal = () => {
+function TraderModal() {
   return (
     <Modal size="lg" aria-labelledby="contained-modal-title-vcenter" centered>
       <Modal.Header closeButton>

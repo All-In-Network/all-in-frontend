@@ -32,10 +32,10 @@ function MainIndex(props) {
 
       <div className="body d-flex py-3 ">
         <Routes>
-          <Route exact path={baseUrl + '/'} element={<Dashboard />} />
-          <Route exact path={baseUrl + '/dashboard'} element={<Dashboard />} />
-          <Route exact path={baseUrl + '/market'} element={<Market />} />
-          <Route exact path={baseUrl + '/traders'} element={<Traders />} />
+          <Route exact path={`${baseUrl}/`} element={<Dashboard />} />
+          <Route exact path={`${baseUrl}/dashboard`} element={<Dashboard />} />
+          <Route exact path={`${baseUrl}/market`} element={<Market />} />
+          <Route exact path={`${baseUrl}/traders`} element={<Traders />} />
         </Routes>
       </div>
     </div>

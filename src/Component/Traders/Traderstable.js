@@ -16,7 +16,7 @@ function TradersTable() {
         }}
         selectableRows={false}
         className="table myDataTable table-hover align-middle mb-0 d-row nowrap dataTable no-footer dtr-inline"
-        highlightOnHover={true}
+        highlightOnHover
       />
     </div>
   )

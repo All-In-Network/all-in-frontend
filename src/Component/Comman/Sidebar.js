@@ -6,9 +6,9 @@ function Sidebar(props) {
   const baseUrl = process.env.PUBLIC_URL
 
   const openChildren = id => {
-    var otherTabs = document.getElementsByClassName('has-children')
+    const otherTabs = document.getElementsByClassName('has-children')
     if (otherTabs) {
-      for (var i = 0; i < otherTabs.length; i++) {
+      for (let i = 0; i < otherTabs.length; i++) {
         if (otherTabs[i].id !== id) {
           otherTabs[i].className = otherTabs[i].className.replace(' show', '')
           if (otherTabs[i].parentElement.children.length > 1) {
@@ -20,7 +20,7 @@ function Sidebar(props) {
         }
       }
     }
-    var menutab = document.getElementById(id)
+    const menutab = document.getElementById(id)
     if (menutab) {
       if (menutab.classList.contains('show')) {
         menutab.classList.remove('show')
@@ -42,13 +42,13 @@ function Sidebar(props) {
     }
   }
   const openChildren1 = id => {
-    var otherTabs = document.getElementsByClassName('has-children')
+    const otherTabs = document.getElementsByClassName('has-children')
     if (otherTabs) {
-      for (var i = 0; i < otherTabs.length; i++) {
+      for (let i = 0; i < otherTabs.length; i++) {
         otherTabs[i].className = otherTabs[i].className.replace(' show', '')
       }
     }
-    var menutab = document.getElementById(id)
+    const menutab = document.getElementById(id)
     if (menutab) {
       menutab.classList.add('show')
       if (menutab.parentElement.children.length > 1) {
@@ -69,7 +69,7 @@ function Sidebar(props) {
       <div className="d-flex flex-column h-100">
         <div className="pt-2 mb-0 brand-icon">
           <span className="logo-icon">
-            <i className="fa fa-gg-circle fs-3"></i>
+            <i className="fa fa-gg-circle fs-3" />
           </span>
           <span className="logo-text">All In Network</span>
         </div>
@@ -77,9 +77,9 @@ function Sidebar(props) {
           {menuData.map((d, i) => {
             if (d.isToggled) {
               return (
-                <li key={'shsdg' + i}>
+                <li key={`shsdg${i}`}>
                   <Link
-                    className={`m-link`}
+                    className="m-link"
                     to="#!"
                     onClick={e => {
                       e.preventDefault()
@@ -99,12 +99,12 @@ function Sidebar(props) {
                         d={d.iconClasss}
                         style={{ fill: 'var(--primary-color)' }}
                         data-st="fill:var(--chart-color4);"
-                      ></path>
+                      />
                       <path
                         xmlns="http://www.w3.org/2000/svg"
                         className="st0"
                         d={d.iconClass}
-                      ></path>
+                      />
                     </svg>
                     <div>
                       <h6 className="mb-0">{d.name}</h6>
@@ -116,11 +116,11 @@ function Sidebar(props) {
             }
             if (d.children.length === 0) {
               return (
-                <li key={'dsfshsdg' + i} className=" collapsed">
+                <li key={`dsfshsdg${i}`} className=" collapsed">
                   <Link
-                    to={baseUrl + '/' + d.routerLink[0]}
+                    to={`${baseUrl}/${d.routerLink[0]}`}
                     className={`m-link ${
-                      '/' + d.routerLink[0] === activekey ? 'active' : ''
+                      `/${d.routerLink[0]}` === activekey ? 'active' : ''
                     }`}
                   >
                     <svg
@@ -136,12 +136,12 @@ function Sidebar(props) {
                         d={d.iconClasss}
                         style={{ fill: 'var(--primary-color)' }}
                         data-st="fill:var(--chart-color4);"
-                      ></path>
+                      />
                       <path
                         xmlns="http://www.w3.org/2000/svg"
                         className="st0"
                         d={d.iconClass}
-                      ></path>
+                      />
                     </svg>
                     <div>
                       <h6 className="mb-0">{d.name}</h6>
@@ -152,12 +152,12 @@ function Sidebar(props) {
               )
             }
             return (
-              <li key={'shsdg' + i} className=" collapsed">
+              <li key={`shsdg${i}`} className=" collapsed">
                 <Link
                   to="#!"
                   className={`m-link ${
                     d.children.filter(
-                      d => baseUrl + '/' + d.routerLink[0] === activekey
+                      d => `${baseUrl}/${d.routerLink[0]}` === activekey
                     ).length > 0
                       ? 'active'
                       : ''
@@ -165,7 +165,7 @@ function Sidebar(props) {
                   href="#!"
                   onClick={e => {
                     e.preventDefault()
-                    openChildren('menu-Pages' + i)
+                    openChildren(`menu-Pages${i}`)
                   }}
                 >
                   <svg
@@ -181,42 +181,42 @@ function Sidebar(props) {
                       d={d.iconClasss}
                       style={{ fill: 'var(--primary-color)' }}
                       data-st="fill:var(--chart-color4);"
-                    ></path>
+                    />
                     <path
                       xmlns="http://www.w3.org/2000/svg"
                       className="st0"
                       d={d.iconClass}
-                    ></path>
+                    />
                   </svg>
                   <div>
                     <h6 className="mb-0">{d.name}</h6>
                     <small className="text-muted">{d.subject}</small>
                   </div>
-                  <span className="arrow icofont-dotted-down ms-auto text-end fs-5"></span>
+                  <span className="arrow icofont-dotted-down ms-auto text-end fs-5" />
                 </Link>
 
                 {d.children.length > 0 ? (
                   <ul
                     className="sub-menu collapse has-children"
-                    id={'menu-Pages' + i}
+                    id={`menu-Pages${i}`}
                   >
                     {d.children.map((data, ind) => {
                       if (d.children.length > 0) {
-                        if (activekey === '/' + data.routerLink[0]) {
+                        if (activekey === `/${data.routerLink[0]}`) {
                           setTimeout(() => {
-                            openChildren1('menu-Pages' + i)
+                            openChildren1(`menu-Pages${i}`)
                           }, 500)
                         }
                       }
                       return (
-                        <li key={'jfdgj' + ind}>
+                        <li key={`jfdgj${ind}`}>
                           <Link
                             className={
-                              activekey === '/' + data.routerLink[0]
+                              activekey === `/${data.routerLink[0]}`
                                 ? 'ms-link active'
                                 : 'ms-link'
                             }
-                            to={baseUrl + '/' + data.routerLink[0]}
+                            to={`${baseUrl}/${data.routerLink[0]}`}
                           >
                             <span>{data.name}</span>
                           </Link>
@@ -237,7 +237,7 @@ function Sidebar(props) {
           }}
         >
           <span className="ms-2">
-            <i className="icofont-bubble-right"></i>
+            <i className="icofont-bubble-right" />
           </span>
         </button>
       </div>

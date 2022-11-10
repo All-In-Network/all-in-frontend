@@ -12,7 +12,7 @@ export const WalletStateContext = React.createContext(undefined)
 
 export const WalletDispatchContext = React.createContext(undefined)
 
-export const WalletProvider = ({ children }) => {
+export function WalletProvider({ children }) {
   const [state, dispatch] = React.useReducer(walletReducer, INITIAL_STATE)
 
   return (

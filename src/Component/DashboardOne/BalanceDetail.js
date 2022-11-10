@@ -96,7 +96,7 @@ function BalanceDetail() {
           total: {
             show: true,
             label: 'Total',
-            formatter: function (w) {
+            formatter(w) {
               // By default this function returns the average of all series. The below is just an example to show the use of custom formatter function
               return 249
             },
@@ -159,7 +159,7 @@ function BalanceDetail() {
             fontSize: '17px',
           },
           value: {
-            formatter: function (val) {
+            formatter(val) {
               return parseInt(val)
             },
             color: '#111',
@@ -221,7 +221,7 @@ function BalanceDetail() {
               <div className="col">
                 <div className="security border-bottom border-end">
                   <div className="d-flex align-items-start px-2 py-3">
-                    <div className="dot-green mx-2 my-2"></div>
+                    <div className="dot-green mx-2 my-2" />
                     <div className="d-flex flex-column">
                       <span className="flex-fill text-truncate">
                         Profit Goal:
@@ -235,7 +235,7 @@ function BalanceDetail() {
               <div className="col">
                 <div className="security border-bottom">
                   <div className="d-flex align-items-start px-2 py-3">
-                    <div className="dot-green mx-2 my-2"></div>
+                    <div className="dot-green mx-2 my-2" />
                     <div className="d-flex flex-column">
                       <span className="flex-fill text-truncate">
                         EOD Drawdown
@@ -249,7 +249,7 @@ function BalanceDetail() {
               <div className="col">
                 <div className="security  border-end">
                   <div className="d-flex align-items-start px-2 py-3">
-                    <div className="dot-green mx-2 my-2"></div>
+                    <div className="dot-green mx-2 my-2" />
                     <div className="d-flex flex-column">
                       <span className="flex-fill text-truncate">
                         Max Daily Loss
@@ -263,7 +263,7 @@ function BalanceDetail() {
               <div className="col">
                 <div className="security ">
                   <div className="d-flex align-items-start px-2 py-3">
-                    <div className="dot-green mx-2 my-2"></div>
+                    <div className="dot-green mx-2 my-2" />
                     <div className="d-flex flex-column">
                       <span className="flex-fill text-truncate">
                         Maintain Consistency
@@ -277,7 +277,7 @@ function BalanceDetail() {
               <div className="col">
                 <div className="security ">
                   <div className="d-flex align-items-start px-2 py-3">
-                    <div className="dot-green mx-2 my-2"></div>
+                    <div className="dot-green mx-2 my-2" />
                     <div className="d-flex flex-column">
                       <span className="flex-fill text-truncate">
                         Trade a Minimum of 15 Trading Days
@@ -332,11 +332,9 @@ function BalanceDetail() {
                       />
                       <div className="resize-triggers">
                         <div className="expand-trigger">
-                          <div
-                            style={{ width: '512px', height: '260px' }}
-                          ></div>
+                          <div style={{ width: '512px', height: '260px' }} />
                         </div>
-                        <div className="contract-trigger"></div>
+                        <div className="contract-trigger" />
                       </div>
                     </div>
                   </div>

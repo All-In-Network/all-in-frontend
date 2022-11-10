@@ -1,11 +1,14 @@
 import React, { useCallback, useState } from 'react'
 import { Button, Nav, Spinner, Tab } from 'react-bootstrap'
+import Modal from 'react-bootstrap/Modal'
 import PageTitle from '../../Component/Comman/PageTitle'
 import { CandleChart } from '../../Component/Market/Charting'
 import { useIsConnected } from '../../hooks/useIsConnected'
-import Modal from 'react-bootstrap/Modal'
-import { useActions } from '../../hooks/wallet'
-import { useWalletDispatch, useWalletState } from '../../hooks/wallet'
+import {
+  useActions,
+  useWalletDispatch,
+  useWalletState,
+} from '../../hooks/wallet'
 
 const isWin = { win: 'win', lost: 'lost' }
 
@@ -48,12 +51,12 @@ function Market() {
   const transaction = type => {
     setState({ ...state, price: currentBar?.close })
 
-    let amount = 1
-    setBalance({ totalBalance: totalBalance })
-    let expected = amount / currentBar?.close
-    let curPrice = currentBar?.close
+    const amount = 1
+    setBalance({ totalBalance })
+    const expected = amount / currentBar?.close
+    const curPrice = currentBar?.close
 
-    let def = 40
+    const def = 40
     let sl = 0
     let tp = 0
 
@@ -69,13 +72,13 @@ function Market() {
 
     setOrder({
       price: curPrice,
-      amount: amount,
-      type: type,
+      amount,
+      type,
       status: 'pending',
       pair: 'BTC/USD',
       sl: parseInt(sl),
       tp: parseInt(tp),
-      expected: expected,
+      expected,
     })
   }
 
@@ -232,7 +235,7 @@ function Market() {
 
 export default Market
 
-const Alert = ({ show, handleClose, type, customFn }) => {
+function Alert({ show, handleClose, type, customFn }) {
   const [isLoading, setIsLoading] = useState(false)
 
   const { createFundingAccount } = useActions()
@@ -257,15 +260,13 @@ const Alert = ({ show, handleClose, type, customFn }) => {
       <Modal.Footer>
         <Button variant="primary" onClick={onClick} disabled={isLoading}>
           {isLoading && (
-            <React.Fragment>
-              <Spinner
-                as="span"
-                animation="grow"
-                size="sm"
-                role="status"
-                aria-hidden="true"
-              />
-            </React.Fragment>
+            <Spinner
+              as="span"
+              animation="grow"
+              size="sm"
+              role="status"
+              aria-hidden="true"
+            />
           )}
           {type === 'win' ? 'Claim Funding Account!' : 'Go to Test Dashboard'}
         </Button>

@@ -1,8 +1,8 @@
 import React, { useCallback, useState } from 'react'
-import { useActions } from '../../hooks/wallet'
 import Button from 'react-bootstrap/Button'
 import Spinner from 'react-bootstrap/Spinner'
 import { useNavigate } from 'react-router'
+import { useActions } from '../../hooks/wallet'
 
 function ProfileSetting() {
   const [loading, setLoading] = useState(false)
@@ -56,15 +56,13 @@ function ProfileSetting() {
         <div className="col-12 mt-4">
           <Button variant="primary" onClick={_faucet} disabled={loading}>
             {loading && (
-              <React.Fragment>
-                <Spinner
-                  as="span"
-                  animation="grow"
-                  size="sm"
-                  role="status"
-                  aria-hidden="true"
-                />
-              </React.Fragment>
+              <Spinner
+                as="span"
+                animation="grow"
+                size="sm"
+                role="status"
+                aria-hidden="true"
+              />
             )}
             Faucet
           </Button>
@@ -76,15 +74,13 @@ function ProfileSetting() {
             disabled={loading}
           >
             {loading && (
-              <React.Fragment>
-                <Spinner
-                  as="span"
-                  animation="grow"
-                  size="sm"
-                  role="status"
-                  aria-hidden="true"
-                />
-              </React.Fragment>
+              <Spinner
+                as="span"
+                animation="grow"
+                size="sm"
+                role="status"
+                aria-hidden="true"
+              />
             )}
             Get Soulbound
           </Button>

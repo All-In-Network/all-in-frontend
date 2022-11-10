@@ -1,4 +1,3 @@
-import Avatar1 from '../../assets/images/xs/avatar1.svg'
 import React, { useRef } from 'react'
 import Col from 'react-bootstrap/Col'
 import Container from 'react-bootstrap/Container'
@@ -16,6 +15,7 @@ import {
   Legend,
 } from 'chart.js'
 import { Line } from 'react-chartjs-2'
+import Avatar1 from '../../assets/images/xs/avatar1.svg'
 import 'bootstrap/dist/js/bootstrap.bundle.js'
 import 'bootstrap/dist/css/bootstrap.css'
 
@@ -65,13 +65,13 @@ export const chart = {
   ],
 }
 
-const MyBar = () => {
+function MyBar() {
   const chartRef = useRef(null)
 
   return <Line ref={chartRef} data={chart} />
 }
 
-const TraderModal = () => {
+function TraderModal() {
   return (
     <Modal size="lg" aria-labelledby="contained-modal-title-vcenter" centered>
       <Modal.Header closeButton>
@@ -144,28 +144,28 @@ export const TradersListData = {
       sortable: true,
       cell: () => (
         <div>
-          <div class="openbtn text-center">
+          <div className="openbtn text-center">
             <button
               type="button"
-              class="btn btn-primary"
+              className="btn btn-primary"
               data-bs-toggle="modal"
               data-bs-target="#myModal"
             >
               Show More
             </button>
-            <div class="modal" tabindex="-1" id="myModal">
-              <div class="modal-dialog">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <h5 class="modal-title">DeGen's trader profile</h5>
+            <div className="modal" tabIndex="-1" id="myModal">
+              <div className="modal-dialog">
+                <div className="modal-content">
+                  <div className="modal-header">
+                    <h5 className="modal-title">DeGen's trader profile</h5>
                     <button
                       type="button"
-                      class="btn-close"
+                      className="btn-close"
                       data-bs-dismiss="modal"
                       aria-label="Close"
-                    ></button>
+                    />
                   </div>
-                  <div class="modal-body">
+                  <div className="modal-body">
                     <MyBar />
                     <Container>
                       {data.map(item => {
@@ -182,10 +182,10 @@ export const TradersListData = {
                       })}
                     </Container>
                   </div>
-                  <div class="modal-footer">
+                  <div className="modal-footer">
                     <button
                       type="button"
-                      class="btn btn-secondary"
+                      className="btn btn-secondary"
                       data-bs-dismiss="modal"
                     >
                       Close

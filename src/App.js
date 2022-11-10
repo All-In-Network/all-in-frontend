@@ -1,23 +1,23 @@
 import React, { useState } from 'react'
 import { connect } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
 import Sidebar from './Component/Comman/Sidebar'
 import MainIndex from './Screen/MainIndex'
-import { useNavigate } from 'react-router-dom'
 import AuthIndex from './Screen/AuthIndex'
-import menu from '../src/Component/Data/Menu/Menu.json'
-import menu2 from '../src/Component/Data/Menu/Menu2.json'
+import menu from './Component/Data/Menu/Menu.json'
+import menu2 from './Component/Data/Menu/Menu2.json'
 
 function App(props) {
   const [menuData, setMenuData] = useState([...menu.menu])
   const navigate = useNavigate()
-  var baseUrl = process.env.PUBLIC_URL
+  const baseUrl = process.env.PUBLIC_URL
   const activekey = () => {
-    var res = window.location.pathname
-    var baseUrl = process.env.PUBLIC_URL
+    let res = window.location.pathname
+    let baseUrl = process.env.PUBLIC_URL
     baseUrl = baseUrl.split('/')
     res = res.split('/')
     res = res.length > 0 ? res[baseUrl.length] : '/'
-    res = res ? '/' + res : '/'
+    res = res ? `/${res}` : '/'
     const activeKey1 = res
     return activeKey1
   }
@@ -33,7 +33,7 @@ function App(props) {
     )
   }
   const GotoChangeMenu = val => {
-    navigate(baseUrl + '/')
+    navigate(`${baseUrl}/`)
     setMenuData([...menu.menu])
   }
 

@@ -6,12 +6,12 @@ import {
 } from '@polkadot/extension-dapp'
 import React from 'react'
 import { BN } from 'bn.js'
+import { useNavigate } from 'react-router'
 import { config } from '../config'
 import {
   WalletDispatchContext,
   WalletStateContext,
 } from '../Context/CreateContext/CreateContext'
-import { useNavigate } from 'react-router'
 
 const keyring = new Keyring({ type: 'sr25519' })
 
@@ -35,7 +35,7 @@ export const useWalletDispatch = () => {
   const setAccounts = payload => {
     dispatch({
       type: 'SET_ACCOUNTS',
-      payload: payload,
+      payload,
     })
   }
 
@@ -70,11 +70,11 @@ export const useWalletDispatch = () => {
 
       const isSoulbound = allSoulbound.find(
         ([value, exposure]) =>
-          //@ts-ignore
+          // @ts-ignore
           exposure.toJSON().owner.accountId === state?.accounts?.[0].address
       )
 
-      //@ts-ignore
+      // @ts-ignore
       const { metadata } = isSoulbound?.[1].toHuman() ?? {}
 
       dispatch({
@@ -163,7 +163,7 @@ export const useActions = () => {
       const managerIsSet = await api?.query.funding.manager()
       let proxy = ''
       const newAcc = accounts?.[0].address
-      //const newAcc = bob.address;
+      // const newAcc = bob.address;
       if (managerIsSet?.toHuman() === alice.address) {
         api?.tx.funding
           .createNewFundingAccount('Any', null, null)
@@ -201,7 +201,7 @@ export const useActions = () => {
         }, 20000)
 
         setTimeout(async () => {
-          console.log('proxy ACC: ' + proxy)
+          console.log(`proxy ACC: ${proxy}`)
           const balance = new BN('1000000000000000')
           api?.tx.balances
             .transfer(proxy, balance)
@@ -243,7 +243,7 @@ export const useActions = () => {
                   }
                 )
                 alert('Your account has been created')
-                //process.exit(0);
+                // process.exit(0);
               }
             })
           }, 8000)

@@ -7,16 +7,14 @@ function RegisterSoulbound() {
   useIsConnected()
 
   return (
-    <>
-      <div className="body d-flex p-0 p-xl-5">
-        <div className="container">
-          <div className="row g-3">
-            <Nftcard />
-            <ProfileSetting />
-          </div>
+    <div className="body d-flex p-0 p-xl-5">
+      <div className="container">
+        <div className="row g-3">
+          <Nftcard />
+          <ProfileSetting />
         </div>
       </div>
-    </>
+    </div>
   )
 }
 

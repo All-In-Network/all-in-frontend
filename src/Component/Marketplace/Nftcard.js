@@ -9,7 +9,7 @@ function NftCard() {
       <div className="card-body d-flex profile-fulldeatil flex-column">
         <div className="profile-block text-center w220 mx-auto">
           <img
-            src={`https://gateway.pinata.cloud/ipfs/QmPHXvMi5ebs3ZDe42z8fZsRGqRj83UZ3MJovVyoVuoSHB`}
+            src="https://gateway.pinata.cloud/ipfs/QmPHXvMi5ebs3ZDe42z8fZsRGqRj83UZ3MJovVyoVuoSHB"
             alt="Nft soulbound"
             className=" rounded img-thumbnail shadow-sm"
           />

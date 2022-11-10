@@ -1,6 +1,5 @@
-import { Modal } from 'react-bootstrap'
+import { Modal, Tab, Nav } from 'react-bootstrap'
 import React, { useState } from 'react'
-import { Tab, Nav } from 'react-bootstrap'
 
 function PageTitle(props) {
   const [rewardModel, setRewardModel] = useState(false)
@@ -56,7 +55,8 @@ function PageTitle(props) {
                 setCaleModel(true)
               }}
             >
-              <i className="icofont-plus-circle me-2 fs-6"></i>Add Event
+              <i className="icofont-plus-circle me-2 fs-6" />
+              Add Event
             </button>
           </div>
         ) : null}
@@ -189,7 +189,7 @@ function PageTitle(props) {
               id="exampleFormControlTextarea78"
               rows="3"
               placeholder="Add any extra details about the request"
-            ></textarea>
+            />
           </div>
         </Modal.Body>
         <Modal.Footer className="modal-footer">
