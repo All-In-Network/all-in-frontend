@@ -39,7 +39,8 @@ function BalanceDetail() {
   })
   const [series] = useState([44, 55, 41, 17])
 
-  const { totalBalance } = useWalletState()
+  const { totalBalance, goals } = useWalletState()
+  const totalprofit = goals.initialBalance - goals.maxDailyLoss
 
   return (
     <div className="row g-3 mb-3 row-deck">
@@ -58,7 +59,7 @@ function BalanceDetail() {
                       <span className="flex-fill text-truncate">
                         Profit Goal:
                       </span>
-                      <span>$ 6.000</span>
+                      <span>${goals.profitGoal}</span>
                       <span>In progress</span>
                     </div>
                   </div>
@@ -69,10 +70,8 @@ function BalanceDetail() {
                   <div className="d-flex align-items-start px-2 py-3">
                     <div className="dot-green mx-2 my-2" />
                     <div className="d-flex flex-column">
-                      <span className="flex-fill text-truncate">
-                        EOD Drawdown
-                      </span>
-                      <span>$ 3.500</span>
+                      <span className="flex-fill text-truncate">Drawdown</span>
+                      <span>${goals.drawdown}</span>
                       <span>In progress</span>
                     </div>
                   </div>
@@ -86,7 +85,7 @@ function BalanceDetail() {
                       <span className="flex-fill text-truncate">
                         Max Daily Loss
                       </span>
-                      <span>$ 2.000</span>
+                      <span>${goals.maxDailyLoss}</span>
                       <span>In progress</span>
                     </div>
                   </div>
@@ -100,7 +99,7 @@ function BalanceDetail() {
                       <span className="flex-fill text-truncate">
                         Maintain Consistency
                       </span>
-                      <span>0 %</span>
+                      <span>{goals.mantainConsistency}%</span>
                       <span>In progress</span>
                     </div>
                   </div>
@@ -144,11 +143,11 @@ function BalanceDetail() {
                       <div className="mt-3 pt-3 text-uppercase text-muted pt-2 small">
                         Min Balance:
                       </div>
-                      <h5>$ 9.600</h5>
+                      <h5>${totalprofit}</h5>
                       <div className="mt-3 text-uppercase text-muted small">
                         Total profit:
                       </div>
-                      <h5>$ 2.000</h5>
+                      <h5>${goals.profitGoal}</h5>
                       <div className="mt-3 text-uppercase text-muted small">
                         Gain:
                       </div>

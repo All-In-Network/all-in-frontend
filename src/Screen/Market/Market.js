@@ -2,6 +2,7 @@
 import React, { useCallback, useState } from 'react'
 import { Button, Nav, Spinner, Tab } from 'react-bootstrap'
 import Modal from 'react-bootstrap/Modal'
+import { useNavigate } from 'react-router-dom'
 import PageTitle from '../../Component/Comman/PageTitle'
 import { CandleChart } from '../../Component/Market/Charting'
 import { useIsConnected } from '../../hooks/useIsConnected'
@@ -27,11 +28,9 @@ function Market() {
 
   const handleClose = () => setOpen(false)
 
-  const [isLiveMarket, setIsLiveMarket] = useState(false)
-
   const [currentBar, setCurrentBar] = useState()
 
-  const { totalBalance } = useWalletState()
+  const { totalBalance, funded } = useWalletState()
   const { setBalance } = useWalletDispatch()
   const [state, setState] = useState({
     balance: 10000,
@@ -84,7 +83,9 @@ function Market() {
   return (
     <>
       <div className="body-header border-bottom d-flex py-3 mb-3">
-        <PageTitle pagetitle={isLiveMarket ? 'Live Market' : 'Test Market'} />
+        <PageTitle
+          pagetitle={funded.isFunded ? 'Live Market' : 'Test Market'}
+        />
       </div>
       <div className="container-xxl">
         <div className="row g-3 mb-3 row-deck">
@@ -222,12 +223,7 @@ function Market() {
         </div>
       </div>
 
-      <Alert
-        show={open}
-        handleClose={handleClose}
-        customFn={() => setIsLiveMarket(true)}
-        type={target}
-      />
+      <Alert show={open} handleClose={handleClose} type={target} />
     </>
   )
 }
@@ -236,14 +232,16 @@ export default Market
 
 function Alert({ show, handleClose, type, customFn }) {
   const [isLoading, setIsLoading] = useState(false)
+  const navigate = useNavigate()
 
   const { createFundingAccount } = useActions()
 
   const onClick = useCallback(() => {
     setIsLoading(true)
     if (type === 'win') {
-      customFn()
       createFundingAccount().finally(() => setIsLoading(false))
+    } else if (type === 'loss') {
+      navigate('/Dashboard')
     }
     handleClose()
     setIsLoading(false)
@@ -253,7 +251,9 @@ function Alert({ show, handleClose, type, customFn }) {
     <Modal show={show}>
       <Modal.Header>
         <Modal.Title>
-          {type === 'win' ? 'Congratulations!' : 'We are sorry :('}
+          {type === 'win'
+            ? 'Congratulations! you are Funded'
+            : 'We are sorry you loss the account :('}
         </Modal.Title>
       </Modal.Header>
       <Modal.Footer>
