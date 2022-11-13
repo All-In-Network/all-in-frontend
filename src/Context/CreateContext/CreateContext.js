@@ -3,9 +3,17 @@ import React from 'react'
 export const INITIAL_STATE = {
   isConnected: false,
   soulbound: { isSoulbound: false, metadata: '' },
+  funded: { isFunded: false },
   accounts: undefined,
   api: undefined,
   totalBalance: 10000,
+  goals: {
+    initialBalance: 10000,
+    profitGoal: 100,
+    drawdown: 400,
+    maxDailyLoss: 200,
+    mantainConsistency: 0,
+  },
 }
 
 function walletReducer(state, action) {
@@ -21,13 +29,16 @@ function walletReducer(state, action) {
       return { ...state, api: payload.api }
     case 'SET_SOULDBOUND':
       const isSoulbound = !!payload.metadata
-      console.log({ isSoulbound })
       return {
         ...state,
         soulbound: { isSoulbound, metadata: payload.metadata },
       }
+    case 'SET_ISFUNDED':
+      return { ...state, funded: { isFunded: payload.isFunded } }
     case 'SET_BALANCE':
       return { ...state, totalBalance: payload.totalBalance }
+    case 'SET_GOALS':
+      return { ...state, goals: payload.goals }
     case 'LOGOUT':
       return { ...INITIAL_STATE }
     default:

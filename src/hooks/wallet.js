@@ -46,6 +46,13 @@ export const useWalletDispatch = () => {
     })
   }
 
+  const setGoals = ({ goals }) => {
+    dispatch({
+      type: 'SET_GOALS',
+      payload: { goals },
+    })
+  }
+
   const extensionSetup = async () => {
     const extensions = await web3Enable('all-in-network')
     if (extensions.length === 0) {
@@ -80,6 +87,17 @@ export const useWalletDispatch = () => {
         type: 'SET_SOULDBOUND',
         payload: { metadata },
       })
+
+      const queryIsFunded = await api?.query.funding.isTradorFunded(
+        state?.accounts?.[0].address
+      )
+
+      if (queryIsFunded.toHuman()) {
+        dispatch({
+          type: 'SET_ISFUNDED',
+          payload: { isFunded: queryIsFunded.toHuman().isFunded },
+        })
+      }
     } catch (error) {
       console.warn('connectRpc error:', error)
     }
@@ -89,7 +107,14 @@ export const useWalletDispatch = () => {
     dispatch({ type: 'LOGOUT' })
   }
 
-  return { setAccounts, extensionSetup, connectRpc, logout, setBalance }
+  return {
+    setAccounts,
+    extensionSetup,
+    connectRpc,
+    logout,
+    setBalance,
+    setGoals,
+  }
 }
 
 export const useActions = () => {
