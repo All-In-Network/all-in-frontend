@@ -1,70 +1,37 @@
-# Getting Started with Create React App
+# All In Front End
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Instalar dependencias
 
-## Available Scripts
+```bash
+ubuntu@ip-172-31-24-248:~ $  git clone https://github.com/All-In-Network/all-in-frontend.git
+ubuntu@ip-172-31-24-248:~ $  git clone https://github.com/All-In-Network/all-in-api.git
 
-In the project directory, you can run:
+ubuntu@ip-172-31-24-248:~ $ cd ~/all-in-frontend && yarn install
+ubuntu@ip-172-31-24-248:~ $ cd ~/all-in-api && yarn install
+```
 
-### `npm start`
+## Ejecutar el Frontend
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+```bash
+ubuntu@ip-172-31-24-248:~ $ cd ~/all-in-frontend
+ubuntu@ip-172-31-24-248:~/all-in-frontend/ $ yarn start
+```
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Ejecutar el Websocket para obtener los datos del criptomercado
 
-### `npm test`
+```bash
+ubuntu@ip-172-31-24-248:~ $ cd ~/all-in-api
+ubuntu@ip-172-31-24-248:~/all-in-api/ $ cp .env.sample .env
+ubuntu@ip-172-31-24-248:~/all-in-api/ $ sed -in "s/HTTP_SERVER_PORT=\"\"/HTTP_SERVER_PORT=\"80\"/gm" .env
+ubuntu@ip-172-31-24-248:~/all-in-api/ $ sed -in "s/CORS_ORIGINS=\"\"/CORS_ORIGINS=\"http:\/\/localhost:3000\"/gm" .env
+ubuntu@ip-172-31-24-248:~/all-in-api/ $ sed -in "s/ALPACA_WSS_URL=\"\"/ALPACA_WSS_URL=\"wss:\/\/stream.data.alpaca.markets\/v1beta2\/crypto\"/gm" .env
+ubuntu@ip-172-31-24-248:~/all-in-api/ $ sed -in "s/ALPACA_KEY=\"\"/ALPACA_KEY=\"${your Alpaca key}\"/gm" .env
+ubuntu@ip-172-31-24-248:~/all-in-api/ $ sed -in "s/ALPACA_SECRET=\"\"/ALPACA_SECRET=\"${your Alpaca secret}\"/gm" .env
+ubuntu@ip-172-31-24-248:~/all-in-api/ $ yarn start
+```
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Direcciones de las aplicaciones
 
-### `npm run build`
+**Frontend:** [http://localhost:3000](http://localhost:3000)
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+**Websocket:** [http://localhost](http://localhost/)
